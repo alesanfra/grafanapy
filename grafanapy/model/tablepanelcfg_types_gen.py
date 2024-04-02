@@ -11,9 +11,9 @@ from grafanapy.utils import MyBaseModel
 
 
 class TableCellHeight(Enum):
-    sm = 'sm'
-    md = 'md'
-    lg = 'lg'
+    sm = "sm"
+    md = "md"
+    lg = "lg"
 
 
 class TableFooterOptions(MyBaseModel):
@@ -37,45 +37,46 @@ class Reducer(Enum):
 
 
 class FooterItem(MyBaseModel):
-    show: Show = Field(..., description='Controls whether the footer should be shown')
+    show: Show = Field(..., description="Controls whether the footer should be shown")
     countRows: CountRows = Field(
         ...,
-        description='Controls whether the footer should show the total number of rows on Count calculation',
+        description="Controls whether the footer should show the total number of rows on Count calculation",
     )
     reducer: Union[List, Reducer] = Field(
-        ..., description='Represents the selected calculations'
+        ..., description="Represents the selected calculations"
     )
 
 
 class TableSortByFieldState(MyBaseModel):
     displayName: str = Field(
-        ..., description='Sets the display name of the field to sort by'
+        ..., description="Sets the display name of the field to sort by"
     )
     desc: Optional[bool] = Field(
-        None, description='Flag used to indicate descending sort order'
+        None, description="Flag used to indicate descending sort order"
     )
 
 
 class PanelOptions(MyBaseModel):
     frameIndex: Optional[float] = Field(
-        0, description='Represents the index of the selected frame'
+        0, description="Represents the index of the selected frame"
     )
     showHeader: Optional[bool] = Field(
-        True, description='Controls whether the panel should show the header'
+        True, description="Controls whether the panel should show the header"
     )
     showTypeIcons: Optional[bool] = Field(
         False,
-        description='Controls whether the header should show icons for the column types',
+        description="Controls whether the header should show icons for the column types",
     )
     sortBy: Optional[List[TableSortByFieldState]] = Field(
-        [], description='Used to control row sorting'  # NOTE MODIFIED
+        [],
+        description="Used to control row sorting",  # NOTE MODIFIED
     )
     footer: Optional[Union[TableFooterOptions, FooterItem]] = Field(
-        {'show': False, 'countRows': False, 'reducer': []},
-        description='Controls footer options',
+        {"show": False, "countRows": False, "reducer": []},
+        description="Controls footer options",
     )
     cellHeight: Optional[TableCellHeight] = Field(
-        None, description='Controls the height of the rows'
+        None, description="Controls the height of the rows"
     )
 
 

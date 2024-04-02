@@ -15,7 +15,7 @@ class PanelOptions(MyBaseModel):
     showSearch: Optional[bool] = False
     showHeadings: Optional[bool] = True
     maxItems: Optional[int] = 10
-    query: Optional[str] = ''
+    query: Optional[str] = ""
     folderId: Optional[int] = None
     tags: List[str]
 

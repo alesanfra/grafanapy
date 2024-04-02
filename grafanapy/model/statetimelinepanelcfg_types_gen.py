@@ -25,26 +25,26 @@ class PanelFieldConfig(HideableFieldConfig):
 
 
 class TimeZoneEnum(Enum):
-    utc = 'utc'
+    utc = "utc"
 
 
 class TimeZone(MyBaseModel):
     __root__: Optional[Union[TimeZoneEnum, Any]] = Field(
-        'browser',
-        description='A specific timezone from https://en.wikipedia.org/wiki/Tz_database',
+        "browser",
+        description="A specific timezone from https://en.wikipedia.org/wiki/Tz_database",
     )
 
 
 class TimelineValueAlignment(Enum):
-    center = 'center'
-    left = 'left'
-    right = 'right'
+    center = "center"
+    left = "left"
+    right = "right"
 
 
 class VisibilityMode(Enum):
-    auto = 'auto'
-    never = 'never'
-    always = 'always'
+    auto = "auto"
+    never = "never"
+    always = "always"
 
 
 class OptionsWithLegend(MyBaseModel):
@@ -60,13 +60,18 @@ class OptionsWithTooltip(MyBaseModel):
 
 
 class PanelOptions(OptionsWithLegend, OptionsWithTooltip, OptionsWithTimezones):
-    showValue: VisibilityMode = Field(VisibilityMode.auto, description='Show timeline values on chart')  # NOTE MODIFIED
-    rowHeight: confloat(le=1.0) = Field(0.9, description='Controls the row height')  # NOTE MODIFIED
+    showValue: VisibilityMode = Field(
+        VisibilityMode.auto, description="Show timeline values on chart"
+    )  # NOTE MODIFIED
+    rowHeight: confloat(le=1.0) = Field(
+        0.9, description="Controls the row height"
+    )  # NOTE MODIFIED
     mergeValues: Optional[bool] = Field(
-        True, description='Merge equal consecutive values'
+        True, description="Merge equal consecutive values"
     )
     alignValue: Optional[TimelineValueAlignment] = Field(
-        TimelineValueAlignment.left, description='Controls value alignment on the timelines'  # NOTE MODIFIED
+        TimelineValueAlignment.left,
+        description="Controls value alignment on the timelines",  # NOTE MODIFIED
     )
 
 

@@ -17,8 +17,8 @@ class PanelOptions(MyBaseModel):
     showTime: Optional[bool] = True
     showTags: Optional[bool] = True
     navigateToPanel: Optional[bool] = True
-    navigateBefore: Optional[str] = '10m'
-    navigateAfter: Optional[str] = '10m'
+    navigateBefore: Optional[str] = "10m"
+    navigateAfter: Optional[str] = "10m"
 
 
 class AnnotationsListPanelCfg(MyBaseModel):

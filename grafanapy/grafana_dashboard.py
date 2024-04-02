@@ -2,8 +2,6 @@ from pathlib import Path
 
 import typer
 
-import grafanapy.converter.json_to_python
-import grafanapy.converter.python_to_json
 from grafanapy import converter
 
 app = typer.Typer()
@@ -11,8 +9,8 @@ app = typer.Typer()
 
 @app.command()
 def json_to_python(
-        json_path: Path = typer.Option(...),
-        python_path: Path = typer.Option(...),
+    json_path: Path = typer.Option(...),
+    python_path: Path = typer.Option(...),
 ):
     converter.json_to_python.convert(
         json_path=json_path,
@@ -22,9 +20,9 @@ def json_to_python(
 
 @app.command()
 def python_to_json(
-        python_base_dir: Path = typer.Option(...),
-        python_base_package: str = typer.Option(...),
-        json_dir: Path = typer.Option(...),
+    python_base_dir: Path = typer.Option(...),
+    python_base_package: str = typer.Option(...),
+    json_dir: Path = typer.Option(...),
 ):
     converter.python_to_json.convert_package(
         python_base_dir=python_base_dir,

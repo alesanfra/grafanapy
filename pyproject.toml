@@ -28,6 +28,11 @@ classifiers = [
 ]
 dynamic = ["version"]
 
+[project.optional-dependencies]
+dev = [
+    "pre-commit"
+]
+
 
 [project.urls]
 Homepage = "https://github.com/alesanfra/grafanapy"

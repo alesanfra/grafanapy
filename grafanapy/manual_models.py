@@ -1,36 +1,59 @@
 from typing import Literal, Dict, List
 
-from grafanapy.model import piechartpanelcfg_types_gen, timeseriespanelcfg_types_gen, tablepanelcfg_types_gen, \
-    dashboardlistpanelcfg_types_gen, textpanelcfg_types_gen, logspanelcfg_types_gen, statetimelinepanelcfg_types_gen, \
-    heatmappanelcfg_types_gen, statpanelcfg_types_gen
-from grafanapy.model.dashboard_types_gen import Panel, ModeEnum, FieldColor, ThresholdsConfig
+from grafanapy.model import (
+    piechartpanelcfg_types_gen,
+    timeseriespanelcfg_types_gen,
+    tablepanelcfg_types_gen,
+    dashboardlistpanelcfg_types_gen,
+    textpanelcfg_types_gen,
+    logspanelcfg_types_gen,
+    statetimelinepanelcfg_types_gen,
+    heatmappanelcfg_types_gen,
+    statpanelcfg_types_gen,
+)
+from grafanapy.model.dashboard_types_gen import (
+    Panel,
+    ModeEnum,
+    FieldColor,
+    ThresholdsConfig,
+)
 
 
 class TimeSeries(Panel):
-    type: Literal['timeseries'] = 'timeseries'
-    options: timeseriespanelcfg_types_gen.PanelOptions = timeseriespanelcfg_types_gen.PanelOptions()
+    type: Literal["timeseries"] = "timeseries"
+    options: timeseriespanelcfg_types_gen.PanelOptions = (
+        timeseriespanelcfg_types_gen.PanelOptions()
+    )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         if self.fieldConfig.defaults.custom is None:
-            self.fieldConfig.defaults.custom = timeseriespanelcfg_types_gen.GraphFieldConfig()
+            self.fieldConfig.defaults.custom = (
+                timeseriespanelcfg_types_gen.GraphFieldConfig()
+            )
         if self.fieldConfig.defaults.color is None:
             self.fieldConfig.defaults.color = FieldColor(mode=ModeEnum.palette_classic)
 
 
 class PieChart(Panel):
-    type: Literal['piechart'] = 'piechart'
-    options: piechartpanelcfg_types_gen.PanelOptions = piechartpanelcfg_types_gen.PanelOptions()
+    type: Literal["piechart"] = "piechart"
+    options: piechartpanelcfg_types_gen.PanelOptions = (
+        piechartpanelcfg_types_gen.PanelOptions()
+    )
 
 
 class Heatmap(Panel):
-    type: Literal['heatmap'] = 'heatmap'
-    options: heatmappanelcfg_types_gen.PanelOptions = heatmappanelcfg_types_gen.PanelOptions()
+    type: Literal["heatmap"] = "heatmap"
+    options: heatmappanelcfg_types_gen.PanelOptions = (
+        heatmappanelcfg_types_gen.PanelOptions()
+    )
 
 
 class Table(Panel):
-    type: Literal['table'] = 'table'
-    options: tablepanelcfg_types_gen.PanelOptions = tablepanelcfg_types_gen.PanelOptions()
+    type: Literal["table"] = "table"
+    options: tablepanelcfg_types_gen.PanelOptions = (
+        tablepanelcfg_types_gen.PanelOptions()
+    )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -39,26 +62,28 @@ class Table(Panel):
 
 
 class DashboardList(Panel):
-    type: Literal['dashlist'] = 'dashlist'
-    options: dashboardlistpanelcfg_types_gen.PanelOptions = dashboardlistpanelcfg_types_gen.PanelOptions()
+    type: Literal["dashlist"] = "dashlist"
+    options: dashboardlistpanelcfg_types_gen.PanelOptions = (
+        dashboardlistpanelcfg_types_gen.PanelOptions()
+    )
 
 
 class AlertList(Panel):
-    type: Literal['alertlist'] = 'alertlist'
+    type: Literal["alertlist"] = "alertlist"
 
 
 class Text(Panel):
-    type: Literal['text'] = 'text'
+    type: Literal["text"] = "text"
     options: textpanelcfg_types_gen.PanelOptions = textpanelcfg_types_gen.PanelOptions()
 
 
 class Logs(Panel):
-    type: Literal['logs'] = 'logs'
+    type: Literal["logs"] = "logs"
     options: logspanelcfg_types_gen.PanelOptions = logspanelcfg_types_gen.PanelOptions()
 
 
 class Stat(Panel):
-    type: Literal['stat'] = 'stat'
+    type: Literal["stat"] = "stat"
     options: statpanelcfg_types_gen.PanelOptions = statpanelcfg_types_gen.PanelOptions()
 
     def __init__(self, **kwargs):
@@ -70,11 +95,14 @@ class Stat(Panel):
 
 
 class StateTimeline(Panel):
-    type: Literal['state-timeline'] = 'state-timeline'
-    options: statetimelinepanelcfg_types_gen.PanelOptions = statetimelinepanelcfg_types_gen.PanelOptions()
+    type: Literal["state-timeline"] = "state-timeline"
+    options: statetimelinepanelcfg_types_gen.PanelOptions = (
+        statetimelinepanelcfg_types_gen.PanelOptions()
+    )
 
 
 # TODO other types
+
 
 def _dict_nested_fill_default_value(d: Dict, keys: List[str], value):
     if len(keys) == 1:

@@ -10,17 +10,17 @@ from grafanapy.utils import MyBaseModel
 
 
 class AxisColorMode(Enum):
-    text = 'text'
-    series = 'series'
+    text = "text"
+    series = "series"
 
 
 class AxisPlacement(Enum):
-    auto = 'auto'
-    top = 'top'
-    right = 'right'
-    bottom = 'bottom'
-    left = 'left'
-    hidden = 'hidden'
+    auto = "auto"
+    top = "top"
+    right = "right"
+    bottom = "bottom"
+    left = "left"
+    hidden = "hidden"
 
 
 class BarAlignment(Enum):
@@ -42,31 +42,31 @@ class FillConfig(MyBaseModel):
 
 
 class GraphDrawStyle(Enum):
-    line = 'line'
-    bars = 'bars'
-    points = 'points'
+    line = "line"
+    bars = "bars"
+    points = "points"
 
 
 class GraphGradientMode(Enum):
-    none = 'none'
-    opacity = 'opacity'
-    hue = 'hue'
-    scheme = 'scheme'
+    none = "none"
+    opacity = "opacity"
+    hue = "hue"
+    scheme = "scheme"
 
 
 class GraphTransform(Enum):
-    constant = 'constant'
-    negative_Y = 'negative-Y'
+    constant = "constant"
+    negative_Y = "negative-Y"
 
 
 class GraphTresholdsStyleMode(Enum):
-    off = 'off'
-    line = 'line'
-    dashed = 'dashed'
-    area = 'area'
-    line_area = 'line+area'
-    dashed_area = 'dashed+area'
-    series = 'series'
+    off = "off"
+    line = "line"
+    dashed = "dashed"
+    area = "area"
+    line_area = "line+area"
+    dashed_area = "dashed+area"
+    series = "series"
 
 
 class HideSeriesConfig(MyBaseModel):
@@ -80,17 +80,17 @@ class HideableFieldConfig(MyBaseModel):
 
 
 class LineInterpolation(Enum):
-    linear = 'linear'
-    smooth = 'smooth'
-    stepBefore = 'stepBefore'
-    stepAfter = 'stepAfter'
+    linear = "linear"
+    smooth = "smooth"
+    stepBefore = "stepBefore"
+    stepAfter = "stepAfter"
 
 
 class Fill(Enum):
-    solid = 'solid'
-    dash = 'dash'
-    dot = 'dot'
-    square = 'square'
+    solid = "solid"
+    dash = "dash"
+    dot = "dot"
+    square = "square"
 
 
 class LineStyle(MyBaseModel):
@@ -99,10 +99,10 @@ class LineStyle(MyBaseModel):
 
 
 class ScaleDistribution(Enum):
-    linear = 'linear'
-    log = 'log'
-    ordinal = 'ordinal'
-    symlog = 'symlog'
+    linear = "linear"
+    log = "log"
+    ordinal = "ordinal"
+    symlog = "symlog"
 
 
 class ScaleDistributionConfig(MyBaseModel):
@@ -112,15 +112,15 @@ class ScaleDistributionConfig(MyBaseModel):
 
 
 class StackingMode(Enum):
-    none = 'none'
-    normal = 'normal'
-    percent = 'percent'
+    none = "none"
+    normal = "normal"
+    percent = "percent"
 
 
 class VisibilityMode(Enum):
-    auto = 'auto'
-    never = 'never'
-    always = 'always'
+    auto = "auto"
+    never = "never"
+    always = "always"
 
 
 class AxisConfig(MyBaseModel):
@@ -146,7 +146,7 @@ class LineConfig(MyBaseModel):
     lineStyle: Optional[LineStyle] = None
     spanNulls: Optional[Union[bool, float]] = Field(
         None,
-        description='Indicate if null values should be treated as gaps or connected.\nWhen the value is a number, it represents the maximum delta in the\nX axis that should be considered connected.  For timeseries, this is milliseconds',
+        description="Indicate if null values should be treated as gaps or connected.\nWhen the value is a number, it represents the maximum delta in the\nX axis that should be considered connected.  For timeseries, this is milliseconds",
     )
 
 
@@ -166,7 +166,7 @@ class PanelOptions(MyBaseModel):
     legend: VizLegendOptions
     tooltip: VizTooltipOptions
     xField: Optional[str] = Field(
-        None, description='Name of the x field to use (defaults to first number)'
+        None, description="Name of the x field to use (defaults to first number)"
     )
 
 
@@ -192,6 +192,6 @@ class GraphFieldConfig(
 class TrendPanelCfg(MyBaseModel):
     PanelOptions: PanelOptions = Field(
         ...,
-        description='Identical to timeseries... except it does not have timezone settings',
+        description="Identical to timeseries... except it does not have timezone settings",
     )
     PanelFieldConfig: GraphFieldConfig

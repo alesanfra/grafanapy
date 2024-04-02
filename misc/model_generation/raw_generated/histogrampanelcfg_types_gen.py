@@ -10,24 +10,24 @@ from pydantic import Field, conint
 
 
 class AxisColorMode(Enum):
-    text = 'text'
-    series = 'series'
+    text = "text"
+    series = "series"
 
 
 class AxisPlacement(Enum):
-    auto = 'auto'
-    top = 'top'
-    right = 'right'
-    bottom = 'bottom'
-    left = 'left'
-    hidden = 'hidden'
+    auto = "auto"
+    top = "top"
+    right = "right"
+    bottom = "bottom"
+    left = "left"
+    hidden = "hidden"
 
 
 class GraphGradientMode(Enum):
-    none = 'none'
-    opacity = 'opacity'
-    hue = 'hue'
-    scheme = 'scheme'
+    none = "none"
+    opacity = "opacity"
+    hue = "hue"
+    scheme = "scheme"
 
 
 class HideSeriesConfig(MyBaseModel):
@@ -41,21 +41,21 @@ class HideableFieldConfig(MyBaseModel):
 
 
 class LegendDisplayMode(Enum):
-    list = 'list'
-    table = 'table'
-    hidden = 'hidden'
+    list = "list"
+    table = "table"
+    hidden = "hidden"
 
 
 class LegendPlacement(Enum):
-    bottom = 'bottom'
-    right = 'right'
+    bottom = "bottom"
+    right = "right"
 
 
 class ScaleDistribution(Enum):
-    linear = 'linear'
-    log = 'log'
-    ordinal = 'ordinal'
-    symlog = 'symlog'
+    linear = "linear"
+    log = "log"
+    ordinal = "ordinal"
+    symlog = "symlog"
 
 
 class ScaleDistributionConfig(MyBaseModel):
@@ -65,15 +65,15 @@ class ScaleDistributionConfig(MyBaseModel):
 
 
 class SortOrder(Enum):
-    asc = 'asc'
-    desc = 'desc'
-    none = 'none'
+    asc = "asc"
+    desc = "desc"
+    none = "none"
 
 
 class TooltipDisplayMode(Enum):
-    single = 'single'
-    multi = 'multi'
-    none = 'none'
+    single = "single"
+    multi = "multi"
+    none = "none"
 
 
 class VizLegendOptions(MyBaseModel):
@@ -107,14 +107,14 @@ class AxisConfig(MyBaseModel):
 
 class PanelFieldConfig(AxisConfig, HideableFieldConfig):
     lineWidth: Optional[conint(ge=0, le=10)] = Field(
-        1, description='Controls line width of the bars.'
+        1, description="Controls line width of the bars."
     )
     fillOpacity: Optional[conint(ge=0, le=100)] = Field(
-        80, description='Controls the fill opacity of the bars.'
+        80, description="Controls the fill opacity of the bars."
     )
     gradientMode: Optional[GraphGradientMode] = Field(
         None,
-        description='Set the mode of the gradient fill. Fill gradient is based on the line color. To change the color, use the standard color scheme field option.\nGradient appearance is influenced by the Fill opacity setting.',
+        description="Set the mode of the gradient fill. Fill gradient is based on the line color. To change the color, use the standard color scheme field option.\nGradient appearance is influenced by the Fill opacity setting.",
     )
 
 
@@ -127,12 +127,12 @@ class OptionsWithTooltip(MyBaseModel):
 
 
 class PanelOptions(OptionsWithLegend, OptionsWithTooltip):
-    bucketSize: Optional[int] = Field(None, description='Size of each bucket')
+    bucketSize: Optional[int] = Field(None, description="Size of each bucket")
     bucketOffset: Optional[conint(ge=-2147483648, le=2147483647)] = Field(
-        0, description='Offset buckets by this amount'
+        0, description="Offset buckets by this amount"
     )
     combine: Optional[bool] = Field(
-        None, description='Combines multiple series into a single histogram'
+        None, description="Combines multiple series into a single histogram"
     )
 
 

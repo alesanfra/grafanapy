@@ -10,17 +10,17 @@ from pydantic import Field
 
 
 class AxisColorMode(Enum):
-    text = 'text'
-    series = 'series'
+    text = "text"
+    series = "series"
 
 
 class AxisPlacement(Enum):
-    auto = 'auto'
-    top = 'top'
-    right = 'right'
-    bottom = 'bottom'
-    left = 'left'
-    hidden = 'hidden'
+    auto = "auto"
+    top = "top"
+    right = "right"
+    bottom = "bottom"
+    left = "left"
+    hidden = "hidden"
 
 
 class BarAlignment(Enum):
@@ -42,31 +42,31 @@ class FillConfig(MyBaseModel):
 
 
 class GraphDrawStyle(Enum):
-    line = 'line'
-    bars = 'bars'
-    points = 'points'
+    line = "line"
+    bars = "bars"
+    points = "points"
 
 
 class GraphGradientMode(Enum):
-    none = 'none'
-    opacity = 'opacity'
-    hue = 'hue'
-    scheme = 'scheme'
+    none = "none"
+    opacity = "opacity"
+    hue = "hue"
+    scheme = "scheme"
 
 
 class GraphTransform(Enum):
-    constant = 'constant'
-    negative_Y = 'negative-Y'
+    constant = "constant"
+    negative_Y = "negative-Y"
 
 
 class GraphTresholdsStyleMode(Enum):
-    off = 'off'
-    line = 'line'
-    dashed = 'dashed'
-    area = 'area'
-    line_area = 'line+area'
-    dashed_area = 'dashed+area'
-    series = 'series'
+    off = "off"
+    line = "line"
+    dashed = "dashed"
+    area = "area"
+    line_area = "line+area"
+    dashed_area = "dashed+area"
+    series = "series"
 
 
 class HideSeriesConfig(MyBaseModel):
@@ -80,28 +80,28 @@ class HideableFieldConfig(MyBaseModel):
 
 
 class LegendDisplayMode(Enum):
-    list = 'list'
-    table = 'table'
-    hidden = 'hidden'
+    list = "list"
+    table = "table"
+    hidden = "hidden"
 
 
 class LegendPlacement(Enum):
-    bottom = 'bottom'
-    right = 'right'
+    bottom = "bottom"
+    right = "right"
 
 
 class LineInterpolation(Enum):
-    linear = 'linear'
-    smooth = 'smooth'
-    stepBefore = 'stepBefore'
-    stepAfter = 'stepAfter'
+    linear = "linear"
+    smooth = "smooth"
+    stepBefore = "stepBefore"
+    stepAfter = "stepAfter"
 
 
 class Fill(Enum):
-    solid = 'solid'
-    dash = 'dash'
-    dot = 'dot'
-    square = 'square'
+    solid = "solid"
+    dash = "dash"
+    dot = "dot"
+    square = "square"
 
 
 class LineStyle(MyBaseModel):
@@ -110,10 +110,10 @@ class LineStyle(MyBaseModel):
 
 
 class ScaleDistribution(Enum):
-    linear = 'linear'
-    log = 'log'
-    ordinal = 'ordinal'
-    symlog = 'symlog'
+    linear = "linear"
+    log = "log"
+    ordinal = "ordinal"
+    symlog = "symlog"
 
 
 class ScaleDistributionConfig(MyBaseModel):
@@ -123,38 +123,38 @@ class ScaleDistributionConfig(MyBaseModel):
 
 
 class SortOrder(Enum):
-    asc = 'asc'
-    desc = 'desc'
-    none = 'none'
+    asc = "asc"
+    desc = "desc"
+    none = "none"
 
 
 class StackingMode(Enum):
-    none = 'none'
-    normal = 'normal'
-    percent = 'percent'
+    none = "none"
+    normal = "normal"
+    percent = "percent"
 
 
 class TimeZoneEnum(Enum):
-    utc = 'utc'
+    utc = "utc"
 
 
 class TimeZone(MyBaseModel):
     __root__: Optional[Union[TimeZoneEnum, Any]] = Field(
-        'browser',
-        description='A specific timezone from https://en.wikipedia.org/wiki/Tz_database',
+        "browser",
+        description="A specific timezone from https://en.wikipedia.org/wiki/Tz_database",
     )
 
 
 class TooltipDisplayMode(Enum):
-    single = 'single'
-    multi = 'multi'
-    none = 'none'
+    single = "single"
+    multi = "multi"
+    none = "none"
 
 
 class VisibilityMode(Enum):
-    auto = 'auto'
-    never = 'never'
-    always = 'always'
+    auto = "auto"
+    never = "never"
+    always = "always"
 
 
 class VizLegendOptions(MyBaseModel):
@@ -197,7 +197,7 @@ class LineConfig(MyBaseModel):
     lineStyle: Optional[LineStyle] = None
     spanNulls: Optional[Union[bool, float]] = Field(
         None,
-        description='Indicate if null values should be treated as gaps or connected.\nWhen the value is a number, it represents the maximum delta in the\nX axis that should be considered connected.  For timeseries, this is milliseconds',
+        description="Indicate if null values should be treated as gaps or connected.\nWhen the value is a number, it represents the maximum delta in the\nX axis that should be considered connected.  For timeseries, this is milliseconds",
     )
 
 

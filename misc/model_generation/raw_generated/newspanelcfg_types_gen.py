@@ -10,7 +10,7 @@ from pydantic import Field
 
 class PanelOptions(MyBaseModel):
     feedUrl: Optional[str] = Field(
-        None, description='empty/missing will default to grafana blog'
+        None, description="empty/missing will default to grafana blog"
     )
     showImage: Optional[bool] = True
 

@@ -6,15 +6,16 @@ from grafanapy.utils import MyBaseModel
 
 # NOTE this is currently *manually* extracted (but may be automated later)
 
+
 class LegendDisplayMode(Enum):
-    list = 'list'
-    table = 'table'
-    hidden = 'hidden'
+    list = "list"
+    table = "table"
+    hidden = "hidden"
 
 
 class LegendPlacement(Enum):
-    bottom = 'bottom'
-    right = 'right'
+    bottom = "bottom"
+    right = "right"
 
 
 class VizLegendOptions(MyBaseModel):
@@ -30,15 +31,15 @@ class VizLegendOptions(MyBaseModel):
 
 
 class TooltipDisplayMode(Enum):
-    single = 'single'
-    multi = 'multi'
-    none = 'none'
+    single = "single"
+    multi = "multi"
+    none = "none"
 
 
 class SortOrder(Enum):
-    asc = 'asc'
-    desc = 'desc'
-    none = 'none'
+    asc = "asc"
+    desc = "desc"
+    none = "none"
 
 
 class VizTooltipOptions(MyBaseModel):

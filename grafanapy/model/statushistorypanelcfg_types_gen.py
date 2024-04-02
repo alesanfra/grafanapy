@@ -25,20 +25,20 @@ class PanelFieldConfig(HideableFieldConfig):
 
 
 class TimeZoneEnum(Enum):
-    utc = 'utc'
+    utc = "utc"
 
 
 class TimeZone(MyBaseModel):
     __root__: Optional[Union[TimeZoneEnum, Any]] = Field(
-        'browser',
-        description='A specific timezone from https://en.wikipedia.org/wiki/Tz_database',
+        "browser",
+        description="A specific timezone from https://en.wikipedia.org/wiki/Tz_database",
     )
 
 
 class VisibilityMode(Enum):
-    auto = 'auto'
-    never = 'never'
-    always = 'always'
+    auto = "auto"
+    never = "never"
+    always = "always"
 
 
 class OptionsWithLegend(MyBaseModel):
@@ -55,11 +55,11 @@ class OptionsWithTooltip(MyBaseModel):
 
 class PanelOptions(OptionsWithLegend, OptionsWithTooltip, OptionsWithTimezones):
     rowHeight: confloat(ge=0.0, le=1.0) = Field(
-        ..., description='Set the height of the rows'
+        ..., description="Set the height of the rows"
     )
-    showValue: VisibilityMode = Field(..., description='Show values on the columns')
+    showValue: VisibilityMode = Field(..., description="Show values on the columns")
     colWidth: Optional[confloat(le=1.0)] = Field(
-        0.9, description='Controls the column width'
+        0.9, description="Controls the column width"
     )
 
 

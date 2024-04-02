@@ -36,13 +36,13 @@ def _repr_should_keep_arg(cls, k: str, v):
     if v is None:
         return False
 
-    info = cls.schema().get('properties', {}).get(k)
+    info = cls.schema().get("properties", {}).get(k)
     # print(f'hi cls={cls} k={k} v={v} info={info}')
 
-    if info is None or 'default' not in info:
+    if info is None or "default" not in info:
         return True
 
-    return v != info['default']
+    return v != info["default"]
 
 
 @dataclass
@@ -53,7 +53,7 @@ class _Reprable:
         return self.content
 
 
-def dashboard_auto_panel_ids(dashboard: 'Dashboard'):
+def dashboard_auto_panel_ids(dashboard: "Dashboard"):
     ids = set([panel.id for panel in dashboard.panels if panel.id])
     auto_ids = (i for i in itertools.count(1) if i not in ids)
     for panel in dashboard.panels:

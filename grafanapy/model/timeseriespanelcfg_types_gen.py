@@ -10,17 +10,17 @@ from grafanapy.utils import MyBaseModel
 
 
 class AxisColorMode(Enum):
-    text = 'text'
-    series = 'series'
+    text = "text"
+    series = "series"
 
 
 class AxisPlacement(Enum):
-    auto = 'auto'
-    top = 'top'
-    right = 'right'
-    bottom = 'bottom'
-    left = 'left'
-    hidden = 'hidden'
+    auto = "auto"
+    top = "top"
+    right = "right"
+    bottom = "bottom"
+    left = "left"
+    hidden = "hidden"
 
 
 class BarAlignment(Enum):
@@ -42,31 +42,31 @@ class FillConfig(MyBaseModel):
 
 
 class GraphDrawStyle(Enum):
-    line = 'line'
-    bars = 'bars'
-    points = 'points'
+    line = "line"
+    bars = "bars"
+    points = "points"
 
 
 class GraphGradientMode(Enum):
-    none = 'none'
-    opacity = 'opacity'
-    hue = 'hue'
-    scheme = 'scheme'
+    none = "none"
+    opacity = "opacity"
+    hue = "hue"
+    scheme = "scheme"
 
 
 class GraphTransform(Enum):
-    constant = 'constant'
-    negative_Y = 'negative-Y'
+    constant = "constant"
+    negative_Y = "negative-Y"
 
 
 class GraphTresholdsStyleMode(Enum):
-    off = 'off'
-    line = 'line'
-    dashed = 'dashed'
-    area = 'area'
-    line_area = 'line+area'
-    dashed_area = 'dashed+area'
-    series = 'series'
+    off = "off"
+    line = "line"
+    dashed = "dashed"
+    area = "area"
+    line_area = "line+area"
+    dashed_area = "dashed+area"
+    series = "series"
 
 
 class HideSeriesConfig(MyBaseModel):
@@ -80,17 +80,17 @@ class HideableFieldConfig(MyBaseModel):
 
 
 class LineInterpolation(Enum):
-    linear = 'linear'
-    smooth = 'smooth'
-    stepBefore = 'stepBefore'
-    stepAfter = 'stepAfter'
+    linear = "linear"
+    smooth = "smooth"
+    stepBefore = "stepBefore"
+    stepAfter = "stepAfter"
 
 
 class Fill(Enum):
-    solid = 'solid'
-    dash = 'dash'
-    dot = 'dot'
-    square = 'square'
+    solid = "solid"
+    dash = "dash"
+    dot = "dot"
+    square = "square"
 
 
 class LineStyle(MyBaseModel):
@@ -99,10 +99,10 @@ class LineStyle(MyBaseModel):
 
 
 class ScaleDistribution(Enum):
-    linear = 'linear'
-    log = 'log'
-    ordinal = 'ordinal'
-    symlog = 'symlog'
+    linear = "linear"
+    log = "log"
+    ordinal = "ordinal"
+    symlog = "symlog"
 
 
 class ScaleDistributionConfig(MyBaseModel):
@@ -112,37 +112,39 @@ class ScaleDistributionConfig(MyBaseModel):
 
 
 class StackingMode(Enum):
-    none = 'none'
-    normal = 'normal'
-    percent = 'percent'
+    none = "none"
+    normal = "normal"
+    percent = "percent"
 
 
 class TimeZoneEnum(Enum):
-    utc = 'utc'
+    utc = "utc"
 
 
 class TimeZone(MyBaseModel):
     __root__: Optional[Union[TimeZoneEnum, Any]] = Field(
-        'browser',
-        description='A specific timezone from https://en.wikipedia.org/wiki/Tz_database',
+        "browser",
+        description="A specific timezone from https://en.wikipedia.org/wiki/Tz_database",
     )
 
 
 class VisibilityMode(Enum):
-    auto = 'auto'
-    never = 'never'
-    always = 'always'
+    auto = "auto"
+    never = "never"
+    always = "always"
 
 
 class AxisConfig(MyBaseModel):
     axisPlacement: Optional[AxisPlacement] = AxisPlacement.auto  # NOTE MODIFIED
     axisColorMode: Optional[AxisColorMode] = None
-    axisLabel: Optional[str] = ''  # NOTE MODIFIED
+    axisLabel: Optional[str] = ""  # NOTE MODIFIED
     axisWidth: Optional[float] = None
     axisSoftMin: Optional[float] = None
     axisSoftMax: Optional[float] = None
     axisGridShow: Optional[bool] = None
-    scaleDistribution: Optional[ScaleDistributionConfig] = ScaleDistributionConfig()  # NOTE MODIFIED
+    scaleDistribution: Optional[ScaleDistributionConfig] = (
+        ScaleDistributionConfig()
+    )  # NOTE MODIFIED
     axisCenteredZero: Optional[bool] = None
 
 
@@ -153,11 +155,13 @@ class GraphThresholdsStyleConfig(MyBaseModel):
 class LineConfig(MyBaseModel):
     lineColor: Optional[str] = None
     lineWidth: Optional[float] = 1  # NOTE MODIFIED
-    lineInterpolation: Optional[LineInterpolation] = LineInterpolation.linear  # NOTE MODIFIED
+    lineInterpolation: Optional[LineInterpolation] = (
+        LineInterpolation.linear
+    )  # NOTE MODIFIED
     lineStyle: Optional[LineStyle] = None
     spanNulls: Optional[Union[bool, float]] = Field(
         False,  # NOTE MODIFIED
-        description='Indicate if null values should be treated as gaps or connected.\nWhen the value is a number, it represents the maximum delta in the\nX axis that should be considered connected.  For timeseries, this is milliseconds',
+        description="Indicate if null values should be treated as gaps or connected.\nWhen the value is a number, it represents the maximum delta in the\nX axis that should be considered connected.  For timeseries, this is milliseconds",
     )
 
 
@@ -197,7 +201,9 @@ class GraphFieldConfig(
 ):
     drawStyle: Optional[GraphDrawStyle] = GraphDrawStyle.line  # NOTE MODIFIED
     gradientMode: Optional[GraphGradientMode] = GraphGradientMode.none  # NOTE MODIFIED
-    thresholdsStyle: Optional[GraphThresholdsStyleConfig] = GraphThresholdsStyleConfig()  # NOTE MODIFIED
+    thresholdsStyle: Optional[GraphThresholdsStyleConfig] = (
+        GraphThresholdsStyleConfig()
+    )  # NOTE MODIFIED
     transform: Optional[GraphTransform] = None
 
 

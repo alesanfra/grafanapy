@@ -10,27 +10,27 @@ from pydantic import Field
 
 
 class Kind(Enum):
-    AppInsightsGroupByQuery = 'AppInsightsGroupByQuery'
+    AppInsightsGroupByQuery = "AppInsightsGroupByQuery"
 
 
 class Kind1(Enum):
-    AppInsightsMetricNameQuery = 'AppInsightsMetricNameQuery'
+    AppInsightsMetricNameQuery = "AppInsightsMetricNameQuery"
 
 
 class AzureMetricDimension(MyBaseModel):
     dimension: Optional[str] = Field(
-        None, description='Name of Dimension to be filtered on.'
+        None, description="Name of Dimension to be filtered on."
     )
     operator: Optional[str] = Field(
         None,
         description="String denoting the filter operation. Supports 'eq' - equals,'ne' - not equals, 'sw' - starts with. Note that some dimensions may not support all operators.",
     )
     filters: Optional[List[str]] = Field(
-        None, description='Values to match with the filter.'
+        None, description="Values to match with the filter."
     )
     filter: Optional[str] = Field(
         None,
-        description='@deprecated filter is deprecated in favour of filters to support multiselect.',
+        description="@deprecated filter is deprecated in favour of filters to support multiselect.",
     )
 
 
@@ -47,38 +47,38 @@ class AzureMonitorResource(MyBaseModel):
 
 
 class AzureQueryType(Enum):
-    Azure_Monitor = 'Azure Monitor'
-    Azure_Log_Analytics = 'Azure Log Analytics'
-    Azure_Resource_Graph = 'Azure Resource Graph'
-    Azure_Traces = 'Azure Traces'
-    Azure_Subscriptions = 'Azure Subscriptions'
-    Azure_Resource_Groups = 'Azure Resource Groups'
-    Azure_Namespaces = 'Azure Namespaces'
-    Azure_Resource_Names = 'Azure Resource Names'
-    Azure_Metric_Names = 'Azure Metric Names'
-    Azure_Workspaces = 'Azure Workspaces'
-    Azure_Regions = 'Azure Regions'
-    Grafana_Template_Variable_Function = 'Grafana Template Variable Function'
+    Azure_Monitor = "Azure Monitor"
+    Azure_Log_Analytics = "Azure Log Analytics"
+    Azure_Resource_Graph = "Azure Resource Graph"
+    Azure_Traces = "Azure Traces"
+    Azure_Subscriptions = "Azure Subscriptions"
+    Azure_Resource_Groups = "Azure Resource Groups"
+    Azure_Namespaces = "Azure Namespaces"
+    Azure_Resource_Names = "Azure Resource Names"
+    Azure_Metric_Names = "Azure Metric Names"
+    Azure_Workspaces = "Azure Workspaces"
+    Azure_Regions = "Azure Regions"
+    Grafana_Template_Variable_Function = "Grafana Template Variable Function"
 
 
 class AzureResourceGraphQuery(MyBaseModel):
     query: Optional[str] = Field(
-        None, description='Azure Resource Graph KQL query to be executed.'
+        None, description="Azure Resource Graph KQL query to be executed."
     )
     resultFormat: Optional[str] = Field(
         None,
-        description='Specifies the format results should be returned as. Defaults to table.',
+        description="Specifies the format results should be returned as. Defaults to table.",
     )
 
 
 class AzureTracesFilter(MyBaseModel):
     property: str = Field(
-        ..., description='Property name, auto-populated based on available traces.'
+        ..., description="Property name, auto-populated based on available traces."
     )
     operation: str = Field(
-        ..., description='Comparison operator to use. Either equals or not equals.'
+        ..., description="Comparison operator to use. Either equals or not equals."
     )
-    filters: List[str] = Field(..., description='Values to filter by.')
+    filters: List[str] = Field(..., description="Values to filter by.")
 
 
 class BaseGrafanaTemplateVariableQuery(MyBaseModel):
@@ -88,15 +88,15 @@ class BaseGrafanaTemplateVariableQuery(MyBaseModel):
 class DataQuery(MyBaseModel):
     refId: str = Field(
         ...,
-        description='A unique identifier for the query within the list of targets.\nIn server side expressions, the refId is used as a variable name to identify results.\nBy default, the UI will assign A->Z; however setting meaningful names may be useful.',
+        description="A unique identifier for the query within the list of targets.\nIn server side expressions, the refId is used as a variable name to identify results.\nBy default, the UI will assign A->Z; however setting meaningful names may be useful.",
     )
     hide: Optional[bool] = Field(
         None,
-        description='true if query is disabled (ie should not be returned to the dashboard)\nNote this does not always imply that the query should not be executed since\nthe results from a hidden query may be used as the input to other queries (SSE etc)',
+        description="true if query is disabled (ie should not be returned to the dashboard)\nNote this does not always imply that the query should not be executed since\nthe results from a hidden query may be used as the input to other queries (SSE etc)",
     )
     queryType: Optional[str] = Field(
         None,
-        description='Specify the query flavor\nTODO make this required and give it a default',
+        description="Specify the query flavor\nTODO make this required and give it a default",
     )
     datasource: Optional[Any] = Field(
         None,
@@ -105,19 +105,19 @@ class DataQuery(MyBaseModel):
 
 
 class GrafanaTemplateVariableQueryType(Enum):
-    AppInsightsMetricNameQuery = 'AppInsightsMetricNameQuery'
-    AppInsightsGroupByQuery = 'AppInsightsGroupByQuery'
-    SubscriptionsQuery = 'SubscriptionsQuery'
-    ResourceGroupsQuery = 'ResourceGroupsQuery'
-    ResourceNamesQuery = 'ResourceNamesQuery'
-    MetricNamespaceQuery = 'MetricNamespaceQuery'
-    MetricNamesQuery = 'MetricNamesQuery'
-    WorkspacesQuery = 'WorkspacesQuery'
-    UnknownQuery = 'UnknownQuery'
+    AppInsightsMetricNameQuery = "AppInsightsMetricNameQuery"
+    AppInsightsGroupByQuery = "AppInsightsGroupByQuery"
+    SubscriptionsQuery = "SubscriptionsQuery"
+    ResourceGroupsQuery = "ResourceGroupsQuery"
+    ResourceNamesQuery = "ResourceNamesQuery"
+    MetricNamespaceQuery = "MetricNamespaceQuery"
+    MetricNamesQuery = "MetricNamesQuery"
+    WorkspacesQuery = "WorkspacesQuery"
+    UnknownQuery = "UnknownQuery"
 
 
 class Kind2(Enum):
-    MetricDefinitionsQuery = 'MetricDefinitionsQuery'
+    MetricDefinitionsQuery = "MetricDefinitionsQuery"
 
 
 class MetricDefinitionsQuery(BaseGrafanaTemplateVariableQuery):
@@ -129,7 +129,7 @@ class MetricDefinitionsQuery(BaseGrafanaTemplateVariableQuery):
 
 
 class Kind3(Enum):
-    MetricNamesQuery = 'MetricNamesQuery'
+    MetricNamesQuery = "MetricNamesQuery"
 
 
 class MetricNamesQuery(BaseGrafanaTemplateVariableQuery):
@@ -141,7 +141,7 @@ class MetricNamesQuery(BaseGrafanaTemplateVariableQuery):
 
 
 class Kind4(Enum):
-    MetricNamespaceQuery = 'MetricNamespaceQuery'
+    MetricNamespaceQuery = "MetricNamespaceQuery"
 
 
 class MetricNamespaceQuery(BaseGrafanaTemplateVariableQuery):
@@ -153,7 +153,7 @@ class MetricNamespaceQuery(BaseGrafanaTemplateVariableQuery):
 
 
 class Kind5(Enum):
-    ResourceGroupsQuery = 'ResourceGroupsQuery'
+    ResourceGroupsQuery = "ResourceGroupsQuery"
 
 
 class ResourceGroupsQuery(BaseGrafanaTemplateVariableQuery):
@@ -162,7 +162,7 @@ class ResourceGroupsQuery(BaseGrafanaTemplateVariableQuery):
 
 
 class Kind6(Enum):
-    ResourceNamesQuery = 'ResourceNamesQuery'
+    ResourceNamesQuery = "ResourceNamesQuery"
 
 
 class ResourceNamesQuery(BaseGrafanaTemplateVariableQuery):
@@ -173,13 +173,13 @@ class ResourceNamesQuery(BaseGrafanaTemplateVariableQuery):
 
 
 class ResultFormat(Enum):
-    table = 'table'
-    time_series = 'time_series'
-    trace = 'trace'
+    table = "table"
+    time_series = "time_series"
+    trace = "trace"
 
 
 class Kind7(Enum):
-    SubscriptionsQuery = 'SubscriptionsQuery'
+    SubscriptionsQuery = "SubscriptionsQuery"
 
 
 class SubscriptionsQuery(BaseGrafanaTemplateVariableQuery):
@@ -187,7 +187,7 @@ class SubscriptionsQuery(BaseGrafanaTemplateVariableQuery):
 
 
 class Kind8(Enum):
-    UnknownQuery = 'UnknownQuery'
+    UnknownQuery = "UnknownQuery"
 
 
 class UnknownQuery(BaseGrafanaTemplateVariableQuery):
@@ -195,7 +195,7 @@ class UnknownQuery(BaseGrafanaTemplateVariableQuery):
 
 
 class Kind9(Enum):
-    WorkspacesQuery = 'WorkspacesQuery'
+    WorkspacesQuery = "WorkspacesQuery"
 
 
 class WorkspacesQuery(BaseGrafanaTemplateVariableQuery):
@@ -213,23 +213,23 @@ class AppInsightsMetricNameQuery(BaseGrafanaTemplateVariableQuery):
 
 
 class AzureLogsQuery(MyBaseModel):
-    query: Optional[str] = Field(None, description='KQL query to be executed.')
+    query: Optional[str] = Field(None, description="KQL query to be executed.")
     resultFormat: Optional[ResultFormat] = None
     resources: Optional[List[str]] = Field(
-        None, description='Array of resource URIs to be queried.'
+        None, description="Array of resource URIs to be queried."
     )
     workspace: Optional[str] = Field(
         None,
-        description='Workspace ID. This was removed in Grafana 8, but remains for backwards compat',
+        description="Workspace ID. This was removed in Grafana 8, but remains for backwards compat",
     )
     resource: Optional[str] = Field(
-        None, description='@deprecated Use resources instead'
+        None, description="@deprecated Use resources instead"
     )
 
 
 class AzureMetricQuery(MyBaseModel):
     resources: Optional[List[AzureMonitorResource]] = Field(
-        None, description='Array of resource URIs to be queried.'
+        None, description="Array of resource URIs to be queried."
     )
     metricNamespace: Optional[str] = Field(
         None,
@@ -241,72 +241,72 @@ class AzureMetricQuery(MyBaseModel):
     )
     metricName: Optional[str] = Field(
         None,
-        description='The metric to query data for within the specified metricNamespace. e.g. UsedCapacity',
+        description="The metric to query data for within the specified metricNamespace. e.g. UsedCapacity",
     )
     region: Optional[str] = Field(
-        None, description='The Azure region containing the resource(s).'
+        None, description="The Azure region containing the resource(s)."
     )
     timeGrain: Optional[str] = Field(
         None,
-        description='The granularity of data points to be queried. Defaults to auto.',
+        description="The granularity of data points to be queried. Defaults to auto.",
     )
     aggregation: Optional[str] = Field(
         None,
-        description='The aggregation to be used within the query. Defaults to the primaryAggregationType defined by the metric.',
+        description="The aggregation to be used within the query. Defaults to the primaryAggregationType defined by the metric.",
     )
     dimensionFilters: Optional[List[AzureMetricDimension]] = Field(
         None,
-        description='Filters to reduce the set of data returned. Dimensions that can be filtered on are defined by the metric.',
+        description="Filters to reduce the set of data returned. Dimensions that can be filtered on are defined by the metric.",
     )
     top: Optional[str] = Field(
-        None, description='Maximum number of records to return. Defaults to 10.'
+        None, description="Maximum number of records to return. Defaults to 10."
     )
     allowedTimeGrainsMs: Optional[List[int]] = Field(
-        None, description='Time grains that are supported by the metric.'
+        None, description="Time grains that are supported by the metric."
     )
     alias: Optional[str] = Field(
         None,
-        description='Aliases can be set to modify the legend labels. e.g. {{ resourceGroup }}. See docs for more detail.',
+        description="Aliases can be set to modify the legend labels. e.g. {{ resourceGroup }}. See docs for more detail.",
     )
-    timeGrainUnit: Optional[str] = Field(None, description='@deprecated')
+    timeGrainUnit: Optional[str] = Field(None, description="@deprecated")
     dimension: Optional[str] = Field(
         None,
-        description='@deprecated This property was migrated to dimensionFilters and should only be accessed in the migration',
+        description="@deprecated This property was migrated to dimensionFilters and should only be accessed in the migration",
     )
     dimensionFilter: Optional[str] = Field(
         None,
-        description='@deprecated This property was migrated to dimensionFilters and should only be accessed in the migration',
+        description="@deprecated This property was migrated to dimensionFilters and should only be accessed in the migration",
     )
     metricDefinition: Optional[str] = Field(
-        None, description='@deprecated Use metricNamespace instead'
+        None, description="@deprecated Use metricNamespace instead"
     )
     resourceUri: Optional[str] = Field(
         None,
-        description='@deprecated Use resourceGroup, resourceName and metricNamespace instead',
+        description="@deprecated Use resourceGroup, resourceName and metricNamespace instead",
     )
     resourceGroup: Optional[str] = Field(
-        None, description='@deprecated Use resources instead'
+        None, description="@deprecated Use resources instead"
     )
     resourceName: Optional[str] = Field(
-        None, description='@deprecated Use resources instead'
+        None, description="@deprecated Use resources instead"
     )
 
 
 class AzureTracesQuery(MyBaseModel):
     resultFormat: Optional[ResultFormat] = None
     resources: Optional[List[str]] = Field(
-        None, description='Array of resource URIs to be queried.'
+        None, description="Array of resource URIs to be queried."
     )
     operationId: Optional[str] = Field(
-        None, description='Operation ID. Used only for Traces queries.'
+        None, description="Operation ID. Used only for Traces queries."
     )
     traceTypes: Optional[List[str]] = Field(
-        None, description='Types of events to filter by.'
+        None, description="Types of events to filter by."
     )
     filters: Optional[List[AzureTracesFilter]] = Field(
-        None, description='Filters for property values.'
+        None, description="Filters for property values."
     )
-    query: Optional[str] = Field(None, description='KQL query to be executed.')
+    query: Optional[str] = Field(None, description="KQL query to be executed.")
 
 
 class GrafanaTemplateVariableQuery(MyBaseModel):
@@ -326,10 +326,10 @@ class GrafanaTemplateVariableQuery(MyBaseModel):
 
 class AzureMonitorQuery(DataQuery):
     subscription: Optional[str] = Field(
-        None, description='Azure subscription containing the resource(s) to be queried.'
+        None, description="Azure subscription containing the resource(s) to be queried."
     )
     subscriptions: Optional[List[str]] = Field(
-        None, description='Subscriptions to be queried via Azure Resource Graph.'
+        None, description="Subscriptions to be queried via Azure Resource Graph."
     )
     azureMonitor: Optional[AzureMetricQuery] = None
     azureLogAnalytics: Optional[AzureLogsQuery] = None
@@ -338,10 +338,10 @@ class AzureMonitorQuery(DataQuery):
     grafanaTemplateVariableFn: Optional[GrafanaTemplateVariableQuery] = None
     resourceGroup: Optional[str] = Field(
         None,
-        description='Template variables params. These exist for backwards compatiblity with legacy template variables.',
+        description="Template variables params. These exist for backwards compatiblity with legacy template variables.",
     )
     namespace: Optional[str] = None
     resource: Optional[str] = None
     region: Optional[str] = Field(
-        None, description='Azure Monitor query type.\nqueryType: #AzureQueryType'
+        None, description="Azure Monitor query type.\nqueryType: #AzureQueryType"
     )

@@ -3,16 +3,16 @@ from grafanapy.model.dashboard_types_gen import *
 from grafanapy.model.prometheusdataquery_types_gen import *
 
 dashboard = Dashboard(
-    title='Dashboard One',
+    title="Dashboard One",
     panels=[
         TimeSeries(
-            title='Panel Title',
+            title="Panel Title",
             gridPos=GridPos(x=0, y=0, w=12, h=9),
             targets=[
                 PrometheusDataQuery(
-                    datasource='Prometheus',
+                    datasource="Prometheus",
                     expr='avg(1 - rate(node_cpu_seconds_total{mode="idle"}[$__rate_interval])) by (instance, job)',
-                    legendFormat='{{instance}}'
+                    legendFormat="{{instance}}",
                 )
             ],
         )

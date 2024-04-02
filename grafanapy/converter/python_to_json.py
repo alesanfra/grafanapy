@@ -6,10 +6,10 @@ from grafanapy.model.dashboard_types_gen import Dashboard
 
 
 def convert_package(
-        python_base_dir: Path,
-        python_base_package: str,
-        json_dir: Path,
-        check_uid: bool = False,
+    python_base_dir: Path,
+    python_base_package: str,
+    json_dir: Path,
+    check_uid: bool = False,
 ):
     assert python_base_dir.is_dir()
     assert json_dir.is_dir()
@@ -17,25 +17,30 @@ def convert_package(
     sys.path.append(str(python_base_dir))
 
     python_package_dir = python_base_dir / _python_package_to_dir(python_base_package)
-    assert python_package_dir.is_dir(), f'{python_package_dir} should be a directory'
+    assert python_package_dir.is_dir(), f"{python_package_dir} should be a directory"
 
-    for path_python in python_package_dir.glob('**/*.py'):
+    for path_python in python_package_dir.glob("**/*.py"):
         python_package_name = _python_dir_to_package(path_python, python_base_dir)
-        print(f'convert_package examine {path_python} ({python_package_name})')
+        print(f"convert_package examine {path_python} ({python_package_name})")
 
-        if path_python.name in ('__init__.py', '__main__.py'):
+        if path_python.name in ("__init__.py", "__main__.py"):
             continue
         mod = importlib.import_module(python_package_name)
         dashboard = mod.dashboard
         assert isinstance(dashboard, Dashboard)
 
-        path_json = json_dir / str(path_python.parent.relative_to(python_package_dir)).replace('_', '-') \
-                    / f'{path_python.stem.replace("_", "-")}.json'
+        path_json = (
+            json_dir
+            / str(path_python.parent.relative_to(python_package_dir)).replace("_", "-")
+            / f'{path_python.stem.replace("_", "-")}.json'
+        )
 
         if check_uid:
-            assert dashboard.uid, f'check_uid failed: {path_python} dashboard does not have non-empty uid'
+            assert (
+                dashboard.uid
+            ), f"check_uid failed: {path_python} dashboard does not have non-empty uid"
 
-        print(f'convert_package generate {path_python} -> {path_json}')
+        print(f"convert_package generate {path_python} -> {path_json}")
         convert_single(dashboard=dashboard, json_path=path_json)
 
 
@@ -45,8 +50,12 @@ def convert_single(dashboard: Dashboard, json_path: Path):
 
 
 def _python_package_to_dir(s: str) -> str:
-    return s.replace('.', '/')
+    return s.replace(".", "/")
 
 
 def _python_dir_to_package(path_python: Path, python_base_dir: Path) -> str:
-    return str(path_python.relative_to(python_base_dir)).replace('/', '.').removesuffix('.py')
+    return (
+        str(path_python.relative_to(python_base_dir))
+        .replace("/", ".")
+        .removesuffix(".py")
+    )

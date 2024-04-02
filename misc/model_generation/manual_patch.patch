@@ -6,21 +6,21 @@ diff -Nau ../misc/model_generation/raw_generated/barchartpanelcfg_types_gen.py .
  # AUTO GENERATED, PLEASE DO NOT MODIFY BY HAND
 -
  from __future__ import annotations
- 
+
 -from enum import Enum
 -from typing import List, Optional
 +from pydantic import Field, confloat, conint
- 
+
 +from grafana_dashboard.extracted_generated_common_models import *
  from grafana_dashboard.utils import MyBaseModel
 -from pydantic import Field, confloat, conint
- 
- 
+
+
  class AxisColorMode(Enum):
 @@ -50,17 +48,6 @@
      hideFrom: Optional[HideSeriesConfig] = None
- 
- 
+
+
 -class LegendDisplayMode(Enum):
 -    list = 'list'
 -    table = 'table'
@@ -37,8 +37,8 @@ diff -Nau ../misc/model_generation/raw_generated/barchartpanelcfg_types_gen.py .
      log = 'log'
 @@ -74,42 +61,18 @@
      linearThreshold: Optional[float] = None
- 
- 
+
+
 -class SortOrder(Enum):
 -    asc = 'asc'
 -    desc = 'desc'
@@ -49,8 +49,8 @@ diff -Nau ../misc/model_generation/raw_generated/barchartpanelcfg_types_gen.py .
      none = 'none'
      normal = 'normal'
      percent = 'percent'
- 
- 
+
+
 -class TooltipDisplayMode(Enum):
 -    single = 'single'
 -    multi = 'multi'
@@ -61,8 +61,8 @@ diff -Nau ../misc/model_generation/raw_generated/barchartpanelcfg_types_gen.py .
      auto = 'auto'
      never = 'never'
      always = 'always'
- 
- 
+
+
 -class VizLegendOptions(MyBaseModel):
 -    displayMode: LegendDisplayMode
 -    placement: LegendPlacement
@@ -80,8 +80,8 @@ diff -Nau ../misc/model_generation/raw_generated/barchartpanelcfg_types_gen.py .
      vertical = 'vertical'
 @@ -121,11 +84,6 @@
      valueSize: Optional[float] = Field(None, description='Explicit value text size')
- 
- 
+
+
 -class VizTooltipOptions(MyBaseModel):
 -    mode: TooltipDisplayMode
 -    sort: SortOrder
@@ -96,17 +96,17 @@ diff -Nau ../misc/model_generation/raw_generated/bargaugepanelcfg_types_gen.py .
 @@ -5,9 +5,10 @@
  from enum import Enum
  from typing import List, Optional
- 
+
 -from grafana_dashboard.utils import MyBaseModel
  from pydantic import Field, conint
- 
+
 +from grafana_dashboard.utils import MyBaseModel
 +
- 
+
  class BarGaugeDisplayMode(Enum):
      basic = 'basic'
 @@ -55,7 +56,7 @@
- 
+
  class PanelOptions(SingleStatBaseOptions):
      displayMode: BarGaugeDisplayMode
 -    valueMode: BarGaugeValueMode
@@ -120,21 +120,21 @@ diff -Nau ../misc/model_generation/raw_generated/dashboard_types_gen.py ../grafa
 @@ -6,9 +6,13 @@
  from enum import Enum
  from typing import Any, Dict, List, Optional, Union
- 
+
 -from grafana_dashboard.utils import MyBaseModel
  from pydantic import Field, conint, constr
- 
+
 +from grafana_dashboard.model import timeseriespanelcfg_types_gen, piechartpanelcfg_types_gen
 +from grafana_dashboard.model.lokidataquery_types_gen import LokiDataQuery
 +from grafana_dashboard.model.prometheusdataquery_types_gen import PrometheusDataQuery
 +from grafana_dashboard.utils import MyBaseModel
 +
- 
+
  class AnnotationPanelFilter(MyBaseModel):
      exclude: Optional[bool] = Field(
 @@ -44,9 +48,10 @@
- 
- 
+
+
  class DashboardCursorSync(Enum):
 -    integer_0 = 0
 -    integer_1 = 1
@@ -143,23 +143,23 @@ diff -Nau ../misc/model_generation/raw_generated/dashboard_types_gen.py ../grafa
 +    not_shared = 0
 +    shared_crosshair = 1
 +    shared_tooltip = 2
- 
- 
+
+
  class DashboardLinkType(Enum):
 @@ -181,8 +186,9 @@
      empty = 'empty'
- 
- 
+
+
 -class Target(MyBaseModel):
 -    pass
 +# NOTE REMOVED
 +# class Target(MyBaseModel):
 +#     pass
- 
- 
+
+
  class Threshold(MyBaseModel):
 @@ -349,11 +355,11 @@
- 
+
  class DashboardLink(MyBaseModel):
      title: str
 -    type: DashboardLinkType
@@ -175,8 +175,8 @@ diff -Nau ../misc/model_generation/raw_generated/dashboard_types_gen.py ../grafa
      targetBlank: Optional[bool] = False
      includeVars: Optional[bool] = False
 @@ -440,7 +446,8 @@
- 
- 
+
+
  class VariableModel(MyBaseModel):
 -    id: Optional[str] = '00000000-0000-0000-0000-000000000000'
 +    # NOTE MODIFIED https://github.com/fzyzcjy/yplusplus/issues/10127#issuecomment-1630624655
@@ -213,23 +213,23 @@ diff -Nau ../misc/model_generation/raw_generated/dashboard_types_gen.py ../grafa
 +    tagQuery: Optional[str] = None
 +    useTags: Optional[bool] = None
 +    definition: Optional[str] = None
- 
- 
+
+
  class Templating(MyBaseModel):
 -    list: Optional[List[VariableModel]] = None
 +    list: List[VariableModel]  # NOTE MODIFIED
- 
- 
+
+
  class Status(MyBaseModel):
 @@ -473,7 +494,8 @@
- 
- 
+
+
  class AnnotationContainer(MyBaseModel):
 -    list: Optional[List[AnnotationQuery]] = None
 +    # NOTE MODIFIED - should allow any dict for custom data source
 +    list: Optional[List[Union[AnnotationQuery, Dict[str, Any]]]] = []  # NOTE MODIFIED
- 
- 
+
+
  class FieldConfig(MyBaseModel):
 @@ -506,7 +528,7 @@
      min: Optional[float] = None
@@ -254,15 +254,15 @@ diff -Nau ../misc/model_generation/raw_generated/dashboard_types_gen.py ../grafa
          None,
          description='custom is specified by the PanelFieldConfig field\nin panel plugin schemas.',
      )
- 
- 
+
+
  class FieldConfigSource(MyBaseModel):
 -    defaults: FieldConfig
 -    overrides: List[Override]
 +    defaults: FieldConfig = FieldConfig()  # NOTE MODIFIED
 +    overrides: List[Override] = []  # NOTE MODIFIED
- 
- 
+
+
  class Panel(MyBaseModel):
 @@ -535,13 +562,18 @@
          description='FIXME this almost certainly has to be changed in favor of scuemata versions',
@@ -317,8 +317,8 @@ diff -Nau ../misc/model_generation/raw_generated/dashboard_types_gen.py ../grafa
      )
 -    fieldConfig: FieldConfigSource
 +    fieldConfig: FieldConfigSource = FieldConfigSource()  # NOTE MODIFIED
- 
- 
+
+
  class RowPanel(MyBaseModel):
 -    type: Type2
 +    type: Type2 = 'row'  # NOTE MODIFIED
@@ -336,8 +336,8 @@ diff -Nau ../misc/model_generation/raw_generated/dashboard_types_gen.py ../grafa
      repeat: Optional[str] = Field(
          None, description='Name of template variable to repeat for.'
      )
- 
- 
+
+
 -class Spec(MyBaseModel):
 +# NOTE MODIFIED rename "Spec" -> "Dashboard" to avoid confusion
 +class Dashboard(MyBaseModel):
@@ -354,7 +354,7 @@ diff -Nau ../misc/model_generation/raw_generated/dashboard_types_gen.py ../grafa
 +    annotations: Optional[AnnotationContainer] = AnnotationContainer()  # NOTE MODIFIED
      links: Optional[List[DashboardLink]] = Field(None, description='TODO docs')
      snapshot: Optional[Snapshot] = None
- 
+
 +    # NOTE MODIFIED add
 +    def auto_panel_ids(self):
 +        from grafana_dashboard.utils import dashboard_auto_panel_ids
@@ -369,7 +369,7 @@ diff -Nau ../misc/model_generation/raw_generated/dashboard_types_gen.py ../grafa
 +            sort_keys=True,
 +            indent=2,
 +        )
- 
+
 -class Dashboard(MyBaseModel):
 -    metadata: Metadata = Field(
 -        ...,
@@ -388,8 +388,8 @@ diff -Nau ../misc/model_generation/raw_generated/dashboardlistpanelcfg_types_gen
      folderId: Optional[int] = None
 -    tags: List[str]
 +    tags: List[str] = []  # NOTE MODIFIED
- 
- 
+
+
  class DashboardListPanelCfg(MyBaseModel):
 diff -Nau ../misc/model_generation/raw_generated/histogrampanelcfg_types_gen.py ../grafana_dashboard/model/histogrampanelcfg_types_gen.py
 --- ../misc/model_generation/raw_generated/histogrampanelcfg_types_gen.py	2023-07-11 14:03:44.000000000 +0800
@@ -398,21 +398,21 @@ diff -Nau ../misc/model_generation/raw_generated/histogrampanelcfg_types_gen.py 
  # AUTO GENERATED, PLEASE DO NOT MODIFY BY HAND
 -
  from __future__ import annotations
- 
+
 -from enum import Enum
 -from typing import List, Optional
 +from pydantic import Field, conint
- 
+
 +from grafana_dashboard.extracted_generated_common_models import *
  from grafana_dashboard.utils import MyBaseModel
 -from pydantic import Field, conint
- 
- 
+
+
  class AxisColorMode(Enum):
 @@ -40,17 +38,6 @@
      hideFrom: Optional[HideSeriesConfig] = None
- 
- 
+
+
 -class LegendDisplayMode(Enum):
 -    list = 'list'
 -    table = 'table'
@@ -429,8 +429,8 @@ diff -Nau ../misc/model_generation/raw_generated/histogrampanelcfg_types_gen.py 
      log = 'log'
 @@ -64,35 +51,6 @@
      linearThreshold: Optional[float] = None
- 
- 
+
+
 -class SortOrder(Enum):
 -    asc = 'asc'
 -    desc = 'desc'
@@ -467,8 +467,8 @@ diff -Nau ../misc/model_generation/raw_generated/logspanelcfg_types_gen.py ../gr
 --- ../misc/model_generation/raw_generated/logspanelcfg_types_gen.py	2023-07-11 14:03:37.000000000 +0800
 +++ ../grafana_dashboard/model/logspanelcfg_types_gen.py	2023-07-11 18:43:39.000000000 +0800
 @@ -20,14 +20,14 @@
- 
- 
+
+
  class PanelOptions(MyBaseModel):
 -    showLabels: bool
 -    showCommonLabels: bool
@@ -486,8 +486,8 @@ diff -Nau ../misc/model_generation/raw_generated/logspanelcfg_types_gen.py ../gr
 +    enableLogDetails: bool = False  # NOTE MODIFIED
 +    sortOrder: LogsSortOrder = LogsSortOrder.Descending  # NOTE MODIFIED
 +    dedupStrategy: LogsDedupStrategy = LogsDedupStrategy.none  # NOTE MODIFIED
- 
- 
+
+
  class LogsPanelCfg(MyBaseModel):
 diff -Nau ../misc/model_generation/raw_generated/lokidataquery_types_gen.py ../grafana_dashboard/model/lokidataquery_types_gen.py
 --- ../misc/model_generation/raw_generated/lokidataquery_types_gen.py	2023-07-11 14:03:32.000000000 +0800
@@ -495,13 +495,13 @@ diff -Nau ../misc/model_generation/raw_generated/lokidataquery_types_gen.py ../g
 @@ -5,13 +5,14 @@
  from enum import Enum
  from typing import Any, Optional
- 
+
 -from grafana_dashboard.utils import MyBaseModel
  from pydantic import Field
- 
+
 +from grafana_dashboard.utils import MyBaseModel
 +
- 
+
  class DataQuery(MyBaseModel):
      refId: str = Field(
 -        ...,
@@ -516,21 +516,21 @@ diff -Nau ../misc/model_generation/raw_generated/piechartpanelcfg_types_gen.py .
  # AUTO GENERATED, PLEASE DO NOT MODIFY BY HAND
 -
  from __future__ import annotations
- 
+
 -from enum import Enum
 -from typing import List, Optional
 +from pydantic import Field
- 
+
 +from grafana_dashboard.extracted_generated_common_models import *
  from grafana_dashboard.utils import MyBaseModel
 -from pydantic import Field
- 
- 
+
+
  class HideSeriesConfig(MyBaseModel):
 @@ -19,17 +17,6 @@
      hideFrom: Optional[HideSeriesConfig] = None
- 
- 
+
+
 -class LegendDisplayMode(Enum):
 -    list = 'list'
 -    table = 'table'
@@ -556,8 +556,8 @@ diff -Nau ../misc/model_generation/raw_generated/piechartpanelcfg_types_gen.py .
          None,
 @@ -58,30 +45,6 @@
      )
- 
- 
+
+
 -class SortOrder(Enum):
 -    asc = 'asc'
 -    desc = 'desc'
@@ -587,8 +587,8 @@ diff -Nau ../misc/model_generation/raw_generated/piechartpanelcfg_types_gen.py .
      vertical = 'vertical'
 @@ -93,32 +56,27 @@
      valueSize: Optional[float] = Field(None, description='Explicit value text size')
- 
- 
+
+
 -class VizTooltipOptions(MyBaseModel):
 -    mode: TooltipDisplayMode
 -    sort: SortOrder
@@ -596,25 +596,25 @@ diff -Nau ../misc/model_generation/raw_generated/piechartpanelcfg_types_gen.py .
 -
  class OptionsWithTextFormatting(MyBaseModel):
      text: Optional[VizTextDisplayOptions] = None
- 
- 
+
+
  class OptionsWithTooltip(MyBaseModel):
 -    tooltip: VizTooltipOptions
 +    tooltip: VizTooltipOptions = VizTooltipOptions()  # NOTE MODIFIED
- 
- 
+
+
  class PieChartLegendOptions(VizLegendOptions):
 -    values: List[PieChartLegendValues]
 +    values: List[PieChartLegendValues] = []  # NOTE MODIFIED
- 
- 
+
+
  class SingleStatBaseOptions(OptionsWithTextFormatting):
 -    reduceOptions: ReduceDataOptions
 -    orientation: VizOrientation
 +    reduceOptions: Optional[ReduceDataOptions] = ReduceDataOptions()  # NOTE MODIFIED
 +    orientation: Optional[VizOrientation] = None  # NOTE MODIFIED
- 
- 
+
+
  class PanelOptions(OptionsWithTooltip, SingleStatBaseOptions):
 -    pieType: PieChartType
 -    displayLabels: List[PieChartLabels]
@@ -622,8 +622,8 @@ diff -Nau ../misc/model_generation/raw_generated/piechartpanelcfg_types_gen.py .
 +    pieType: PieChartType = PieChartType.pie  # NOTE MODIFIED
 +    displayLabels: List[PieChartLabels] = []  # NOTE MODIFIED
 +    legend: PieChartLegendOptions = PieChartLegendOptions()  # NOTE MODIFIED
- 
- 
+
+
  class PieChartPanelCfg(MyBaseModel):
 diff -Nau ../misc/model_generation/raw_generated/prometheusdataquery_types_gen.py ../grafana_dashboard/model/prometheusdataquery_types_gen.py
 --- ../misc/model_generation/raw_generated/prometheusdataquery_types_gen.py	2023-07-11 14:03:40.000000000 +0800
@@ -631,13 +631,13 @@ diff -Nau ../misc/model_generation/raw_generated/prometheusdataquery_types_gen.p
 @@ -5,13 +5,14 @@
  from enum import Enum
  from typing import Any, Optional
- 
+
 -from grafana_dashboard.utils import MyBaseModel
  from pydantic import Field
- 
+
 +from grafana_dashboard.utils import MyBaseModel
 +
- 
+
  class DataQuery(MyBaseModel):
      refId: str = Field(
 -        ...,
@@ -652,24 +652,24 @@ diff -Nau ../misc/model_generation/raw_generated/statetimelinepanelcfg_types_gen
  # AUTO GENERATED, PLEASE DO NOT MODIFY BY HAND
 -
  from __future__ import annotations
- 
+
 -from enum import Enum
 -from typing import Any, List, Optional, Union
 +from typing import Any, Union
- 
+
 -from grafana_dashboard.utils import MyBaseModel
  from pydantic import Field, confloat, conint
- 
+
 +from grafana_dashboard.extracted_generated_common_models import *
 +from grafana_dashboard.utils import MyBaseModel
 +
- 
+
  class HideSeriesConfig(MyBaseModel):
      tooltip: bool
 @@ -19,23 +19,6 @@
      hideFrom: Optional[HideSeriesConfig] = None
- 
- 
+
+
 -class LegendDisplayMode(Enum):
 -    list = 'list'
 -    table = 'table'
@@ -692,8 +692,8 @@ diff -Nau ../misc/model_generation/raw_generated/statetimelinepanelcfg_types_gen
      fillOpacity: Optional[conint(ge=0, le=100)] = 70
 @@ -58,35 +41,12 @@
      right = 'right'
- 
- 
+
+
 -class TooltipDisplayMode(Enum):
 -    single = 'single'
 -    multi = 'multi'
@@ -704,8 +704,8 @@ diff -Nau ../misc/model_generation/raw_generated/statetimelinepanelcfg_types_gen
      auto = 'auto'
      never = 'never'
      always = 'always'
- 
- 
+
+
 -class VizLegendOptions(MyBaseModel):
 -    displayMode: LegendDisplayMode
 -    placement: LegendPlacement
@@ -725,25 +725,25 @@ diff -Nau ../misc/model_generation/raw_generated/statetimelinepanelcfg_types_gen
 -
  class OptionsWithLegend(MyBaseModel):
      legend: VizLegendOptions
- 
+
 diff -Nau ../misc/model_generation/raw_generated/statpanelcfg_types_gen.py ../grafana_dashboard/model/statpanelcfg_types_gen.py
 --- ../misc/model_generation/raw_generated/statpanelcfg_types_gen.py	2023-07-11 14:03:37.000000000 +0800
 +++ ../grafana_dashboard/model/statpanelcfg_types_gen.py	2023-07-11 21:09:40.000000000 +0800
 @@ -5,9 +5,10 @@
  from enum import Enum
  from typing import List, Optional
- 
+
 -from grafana_dashboard.utils import MyBaseModel
  from pydantic import Field
- 
+
 +from grafana_dashboard.utils import MyBaseModel
 +
- 
+
  class BigValueColorMode(Enum):
      value = 'value'
 @@ -36,13 +37,13 @@
- 
- 
+
+
  class ReduceDataOptions(MyBaseModel):
 -    values: Optional[bool] = Field(None, description='If true show each row value')
 +    values: Optional[bool] = Field(False, description='If true show each row value')  # NOTE MODIFIED
@@ -757,17 +757,17 @@ diff -Nau ../misc/model_generation/raw_generated/statpanelcfg_types_gen.py ../gr
 +        '',  # NOTE MODIFIED
          description='Which fields to show.  By default this is only numeric fields',
      )
- 
+
 @@ -63,15 +64,15 @@
- 
- 
+
+
  class SingleStatBaseOptions(OptionsWithTextFormatting):
 -    reduceOptions: ReduceDataOptions
 -    orientation: VizOrientation
 +    reduceOptions: ReduceDataOptions = ReduceDataOptions()  # NOTE MODIFIED
 +    orientation: VizOrientation = VizOrientation.auto  # NOTE MODIFIED
- 
- 
+
+
  class PanelOptions(SingleStatBaseOptions):
 -    graphMode: BigValueGraphMode
 -    colorMode: BigValueColorMode
@@ -777,8 +777,8 @@ diff -Nau ../misc/model_generation/raw_generated/statpanelcfg_types_gen.py ../gr
 +    colorMode: BigValueColorMode = BigValueColorMode.value  # NOTE MODIFIED
 +    justifyMode: BigValueJustifyMode = BigValueJustifyMode.auto  # NOTE MODIFIED
 +    textMode: BigValueTextMode = BigValueTextMode.auto  # NOTE MODIFIED
- 
- 
+
+
  class StatPanelCfg(MyBaseModel):
 diff -Nau ../misc/model_generation/raw_generated/statushistorypanelcfg_types_gen.py ../grafana_dashboard/model/statushistorypanelcfg_types_gen.py
 --- ../misc/model_generation/raw_generated/statushistorypanelcfg_types_gen.py	2023-07-11 14:03:39.000000000 +0800
@@ -787,24 +787,24 @@ diff -Nau ../misc/model_generation/raw_generated/statushistorypanelcfg_types_gen
  # AUTO GENERATED, PLEASE DO NOT MODIFY BY HAND
 -
  from __future__ import annotations
- 
+
 -from enum import Enum
 -from typing import Any, List, Optional, Union
 +from typing import Any, Union
- 
+
 -from grafana_dashboard.utils import MyBaseModel
  from pydantic import Field, confloat, conint
- 
+
 +from grafana_dashboard.extracted_generated_common_models import *
 +from grafana_dashboard.utils import MyBaseModel
 +
- 
+
  class HideSeriesConfig(MyBaseModel):
      tooltip: bool
 @@ -19,23 +19,6 @@
      hideFrom: Optional[HideSeriesConfig] = None
- 
- 
+
+
 -class LegendDisplayMode(Enum):
 -    list = 'list'
 -    table = 'table'
@@ -827,8 +827,8 @@ diff -Nau ../misc/model_generation/raw_generated/statushistorypanelcfg_types_gen
      fillOpacity: Optional[conint(ge=0, le=100)] = 70
 @@ -52,35 +35,12 @@
      )
- 
- 
+
+
 -class TooltipDisplayMode(Enum):
 -    single = 'single'
 -    multi = 'multi'
@@ -839,8 +839,8 @@ diff -Nau ../misc/model_generation/raw_generated/statushistorypanelcfg_types_gen
      auto = 'auto'
      never = 'never'
      always = 'always'
- 
- 
+
+
 -class VizLegendOptions(MyBaseModel):
 -    displayMode: LegendDisplayMode
 -    placement: LegendPlacement
@@ -860,20 +860,20 @@ diff -Nau ../misc/model_generation/raw_generated/statushistorypanelcfg_types_gen
 -
  class OptionsWithLegend(MyBaseModel):
      legend: VizLegendOptions
- 
+
 diff -Nau ../misc/model_generation/raw_generated/tablepanelcfg_types_gen.py ../grafana_dashboard/model/tablepanelcfg_types_gen.py
 --- ../misc/model_generation/raw_generated/tablepanelcfg_types_gen.py	2023-07-11 14:03:39.000000000 +0800
 +++ ../grafana_dashboard/model/tablepanelcfg_types_gen.py	2023-07-11 16:51:12.000000000 +0800
 @@ -5,9 +5,10 @@
  from enum import Enum
  from typing import List, Optional, Union
- 
+
 -from grafana_dashboard.utils import MyBaseModel
  from pydantic import Field
- 
+
 +from grafana_dashboard.utils import MyBaseModel
 +
- 
+
  class TableCellHeight(Enum):
      sm = 'sm'
 @@ -67,7 +68,7 @@
@@ -889,8 +889,8 @@ diff -Nau ../misc/model_generation/raw_generated/textpanelcfg_types_gen.py ../gr
 --- ../misc/model_generation/raw_generated/textpanelcfg_types_gen.py	2023-07-11 14:03:41.000000000 +0800
 +++ ../grafana_dashboard/model/textpanelcfg_types_gen.py	2023-07-11 18:42:43.000000000 +0800
 @@ -33,7 +33,7 @@
- 
- 
+
+
  class PanelOptions(MyBaseModel):
 -    mode: TextMode
 +    mode: TextMode = TextMode.markdown  # NOTE MODIFIED
@@ -904,40 +904,40 @@ diff -Nau ../misc/model_generation/raw_generated/timeseriespanelcfg_types_gen.py
  # AUTO GENERATED, PLEASE DO NOT MODIFY BY HAND
 -
  from __future__ import annotations
- 
+
 -from enum import Enum
 -from typing import Any, List, Optional, Union
 +from typing import Any, Union
- 
+
 -from grafana_dashboard.utils import MyBaseModel
  from pydantic import Field
- 
+
 +from grafana_dashboard.extracted_generated_common_models import *
 +from grafana_dashboard.utils import MyBaseModel
 +
- 
+
  class AxisColorMode(Enum):
      text = 'text'
 @@ -30,14 +30,14 @@
- 
- 
+
+
  class BarConfig(MyBaseModel):
 -    barAlignment: Optional[BarAlignment] = None
 +    barAlignment: Optional[BarAlignment] = BarAlignment.integer_0  # NOTE MODIFIED
      barWidthFactor: Optional[float] = None
      barMaxWidth: Optional[float] = None
- 
- 
+
+
  class FillConfig(MyBaseModel):
      fillColor: Optional[str] = None
 -    fillOpacity: Optional[float] = None
 +    fillOpacity: Optional[float] = 0  # NOTE MODIFIED
      fillBelowTo: Optional[str] = None
- 
- 
+
+
 @@ -70,24 +70,13 @@
- 
- 
+
+
  class HideSeriesConfig(MyBaseModel):
 -    tooltip: bool
 -    legend: bool
@@ -945,8 +945,8 @@ diff -Nau ../misc/model_generation/raw_generated/timeseriespanelcfg_types_gen.py
 +    tooltip: bool = False  # NOTE MODIFIED
 +    legend: bool = False  # NOTE MODIFIED
 +    viz: bool = False  # NOTE MODIFIED
- 
- 
+
+
  class HideableFieldConfig(MyBaseModel):
 -    hideFrom: Optional[HideSeriesConfig] = None
 -
@@ -961,20 +961,20 @@ diff -Nau ../misc/model_generation/raw_generated/timeseriespanelcfg_types_gen.py
 -    bottom = 'bottom'
 -    right = 'right'
 +    hideFrom: Optional[HideSeriesConfig] = HideSeriesConfig()  # NOTE MODIFIED
- 
- 
+
+
  class LineInterpolation(Enum):
 @@ -117,17 +106,11 @@
- 
- 
+
+
  class ScaleDistributionConfig(MyBaseModel):
 -    type: ScaleDistribution
 -    log: Optional[float] = None
 +    type: ScaleDistribution = ScaleDistribution.linear  # NOTE MODIFIED
 +    log: Optional[float] = 2  # NOTE MODIFIED
      linearThreshold: Optional[float] = None
- 
- 
+
+
 -class SortOrder(Enum):
 -    asc = 'asc'
 -    desc = 'desc'
@@ -986,8 +986,8 @@ diff -Nau ../misc/model_generation/raw_generated/timeseriespanelcfg_types_gen.py
      normal = 'normal'
 @@ -145,58 +128,35 @@
      )
- 
- 
+
+
 -class TooltipDisplayMode(Enum):
 -    single = 'single'
 -    multi = 'multi'
@@ -998,8 +998,8 @@ diff -Nau ../misc/model_generation/raw_generated/timeseriespanelcfg_types_gen.py
      auto = 'auto'
      never = 'never'
      always = 'always'
- 
- 
+
+
 -class VizLegendOptions(MyBaseModel):
 -    displayMode: LegendDisplayMode
 -    placement: LegendPlacement
@@ -1030,13 +1030,13 @@ diff -Nau ../misc/model_generation/raw_generated/timeseriespanelcfg_types_gen.py
 -    scaleDistribution: Optional[ScaleDistributionConfig] = None
 +    scaleDistribution: Optional[ScaleDistributionConfig] = ScaleDistributionConfig()  # NOTE MODIFIED
      axisCenteredZero: Optional[bool] = None
- 
- 
+
+
  class GraphThresholdsStyleConfig(MyBaseModel):
 -    mode: GraphTresholdsStyleMode
 +    mode: GraphTresholdsStyleMode = GraphTresholdsStyleMode.off  # NOTE MODIFIED
- 
- 
+
+
  class LineConfig(MyBaseModel):
      lineColor: Optional[str] = None
 -    lineWidth: Optional[float] = None
@@ -1049,10 +1049,10 @@ diff -Nau ../misc/model_generation/raw_generated/timeseriespanelcfg_types_gen.py
 +        False,  # NOTE MODIFIED
          description='Indicate if null values should be treated as gaps or connected.\nWhen the value is a number, it represents the maximum delta in the\nX axis that should be considered connected.  For timeseries, this is milliseconds',
      )
- 
+
 @@ -206,8 +166,8 @@
- 
- 
+
+
  class PointsConfig(MyBaseModel):
 -    showPoints: Optional[VisibilityMode] = None
 -    pointSize: Optional[float] = None
@@ -1060,22 +1060,22 @@ diff -Nau ../misc/model_generation/raw_generated/timeseriespanelcfg_types_gen.py
 +    pointSize: Optional[float] = 5  # NOTE MODIFIED
      pointColor: Optional[str] = None
      pointSymbol: Optional[str] = None
- 
+
 @@ -218,12 +178,12 @@
- 
- 
+
+
  class PanelOptions(OptionsWithTimezones):
 -    legend: VizLegendOptions
 -    tooltip: VizTooltipOptions
 +    legend: VizLegendOptions = VizLegendOptions()  # NOTE MODIFIED
 +    tooltip: VizTooltipOptions = VizTooltipOptions()  # NOTE MODIFIED
- 
- 
+
+
  class StackableFieldConfig(MyBaseModel):
 -    stacking: Optional[StackingConfig] = None
 +    stacking: Optional[StackingConfig] = StackingConfig()  # NOTE MODIFIED
- 
- 
+
+
  class GraphFieldConfig(
 @@ -235,9 +195,9 @@
      StackableFieldConfig,
@@ -1088,8 +1088,8 @@ diff -Nau ../misc/model_generation/raw_generated/timeseriespanelcfg_types_gen.py
 +    gradientMode: Optional[GraphGradientMode] = GraphGradientMode.none  # NOTE MODIFIED
 +    thresholdsStyle: Optional[GraphThresholdsStyleConfig] = GraphThresholdsStyleConfig()  # NOTE MODIFIED
      transform: Optional[GraphTransform] = None
- 
- 
+
+
 diff -Nau ../misc/model_generation/raw_generated/trendpanelcfg_types_gen.py ../grafana_dashboard/model/trendpanelcfg_types_gen.py
 --- ../misc/model_generation/raw_generated/trendpanelcfg_types_gen.py	2023-07-11 14:03:35.000000000 +0800
 +++ ../grafana_dashboard/model/trendpanelcfg_types_gen.py	2023-07-11 16:24:00.000000000 +0800
@@ -1097,24 +1097,24 @@ diff -Nau ../misc/model_generation/raw_generated/trendpanelcfg_types_gen.py ../g
  # AUTO GENERATED, PLEASE DO NOT MODIFY BY HAND
 -
  from __future__ import annotations
- 
+
 -from enum import Enum
 -from typing import List, Optional, Union
 +from typing import Union
- 
+
 -from grafana_dashboard.utils import MyBaseModel
  from pydantic import Field
- 
+
 +from grafana_dashboard.extracted_generated_common_models import *
 +from grafana_dashboard.utils import MyBaseModel
 +
- 
+
  class AxisColorMode(Enum):
      text = 'text'
 @@ -79,17 +79,6 @@
      hideFrom: Optional[HideSeriesConfig] = None
- 
- 
+
+
 -class LegendDisplayMode(Enum):
 -    list = 'list'
 -    table = 'table'
@@ -1131,8 +1131,8 @@ diff -Nau ../misc/model_generation/raw_generated/trendpanelcfg_types_gen.py ../g
      smooth = 'smooth'
 @@ -122,47 +111,18 @@
      linearThreshold: Optional[float] = None
- 
- 
+
+
 -class SortOrder(Enum):
 -    asc = 'asc'
 -    desc = 'desc'
@@ -1143,8 +1143,8 @@ diff -Nau ../misc/model_generation/raw_generated/trendpanelcfg_types_gen.py ../g
      none = 'none'
      normal = 'normal'
      percent = 'percent'
- 
- 
+
+
 -class TooltipDisplayMode(Enum):
 -    single = 'single'
 -    multi = 'multi'
@@ -1155,8 +1155,8 @@ diff -Nau ../misc/model_generation/raw_generated/trendpanelcfg_types_gen.py ../g
      auto = 'auto'
      never = 'never'
      always = 'always'
- 
- 
+
+
 -class VizLegendOptions(MyBaseModel):
 -    displayMode: LegendDisplayMode
 -    placement: LegendPlacement

@@ -8,15 +8,15 @@ from grafanapy.utils import MyBaseModel
 
 
 class LogsDedupStrategy(Enum):
-    none = 'none'
-    exact = 'exact'
-    numbers = 'numbers'
-    signature = 'signature'
+    none = "none"
+    exact = "exact"
+    numbers = "numbers"
+    signature = "signature"
 
 
 class LogsSortOrder(Enum):
-    Descending = 'Descending'
-    Ascending = 'Ascending'
+    Descending = "Descending"
+    Ascending = "Ascending"
 
 
 class PanelOptions(MyBaseModel):

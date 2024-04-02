@@ -11,108 +11,114 @@ from grafanapy.utils import MyBaseModel
 
 
 class AxisColorMode(Enum):
-    text = 'text'
-    series = 'series'
+    text = "text"
+    series = "series"
 
 
 class AxisPlacement(Enum):
-    auto = 'auto'
-    top = 'top'
-    right = 'right'
-    bottom = 'bottom'
-    left = 'left'
-    hidden = 'hidden'
+    auto = "auto"
+    top = "top"
+    right = "right"
+    bottom = "bottom"
+    left = "left"
+    hidden = "hidden"
 
 
 class CellValues(MyBaseModel):
-    unit: Optional[str] = Field(None, description='Controls the cell value unit')
+    unit: Optional[str] = Field(None, description="Controls the cell value unit")
     decimals: Optional[float] = Field(
-        None, description='Controls the number of decimals for cell values'
+        None, description="Controls the number of decimals for cell values"
     )
 
 
 class ExemplarConfig(MyBaseModel):
-    color: str = Field('rgba(255,0,255,0.7)', description='Sets the color of the exemplar markers')  # NOTE MODIFIED
+    color: str = Field(
+        "rgba(255,0,255,0.7)", description="Sets the color of the exemplar markers"
+    )  # NOTE MODIFIED
 
 
 class FilterValueRange(MyBaseModel):
     le: Optional[float] = Field(
         None,
-        description='Sets the filter range to values less than or equal to the given value',
+        description="Sets the filter range to values less than or equal to the given value",
     )
     ge: Optional[float] = Field(
         None,
-        description='Sets the filter range to values greater than or equal to the given value',
+        description="Sets the filter range to values greater than or equal to the given value",
     )
 
 
 class HeatmapCalculationMode(Enum):
-    size = 'size'
-    count = 'count'
+    size = "size"
+    count = "count"
 
 
 class HeatmapCellLayout(Enum):
-    le = 'le'
-    ge = 'ge'
-    unknown = 'unknown'
-    auto = 'auto'
+    le = "le"
+    ge = "ge"
+    unknown = "unknown"
+    auto = "auto"
 
 
 class HeatmapColorMode(Enum):
-    opacity = 'opacity'
-    scheme = 'scheme'
+    opacity = "opacity"
+    scheme = "scheme"
 
 
 class HeatmapColorScale(Enum):
-    linear = 'linear'
-    exponential = 'exponential'
+    linear = "linear"
+    exponential = "exponential"
 
 
 class HeatmapLegend(MyBaseModel):
-    show: bool = Field(True, description='Controls if the legend is shown')  # NOTE MODIFIED
+    show: bool = Field(
+        True, description="Controls if the legend is shown"
+    )  # NOTE MODIFIED
 
 
 class HeatmapColorOptions(MyBaseModel):
     mode: Optional[HeatmapColorMode] = None
-    scheme: str = Field(..., description='Controls the color scheme used')
-    fill: str = Field(..., description='Controls the color fill when in opacity mode')
+    scheme: str = Field(..., description="Controls the color scheme used")
+    fill: str = Field(..., description="Controls the color fill when in opacity mode")
     scale: Optional[HeatmapColorScale] = None
     exponent: float = Field(
-        ..., description='Controls the exponent when scale is set to exponential'
+        ..., description="Controls the exponent when scale is set to exponential"
     )
     steps: conint(ge=2, le=128) = Field(
-        ..., description='Controls the number of color steps'
+        ..., description="Controls the number of color steps"
     )
-    reverse: bool = Field(..., description='Reverses the color scheme')
+    reverse: bool = Field(..., description="Reverses the color scheme")
     min: Optional[float] = Field(
-        None, description='Sets the minimum value for the color scale'
+        None, description="Sets the minimum value for the color scale"
     )
     max: Optional[float] = Field(
-        None, description='Sets the maximum value for the color scale'
+        None, description="Sets the maximum value for the color scale"
     )
 
 
 class HeatmapTooltip(MyBaseModel):
-    show: bool = Field(True, description='Controls if the tooltip is shown')  # NOTE MODIFIED
+    show: bool = Field(
+        True, description="Controls if the tooltip is shown"
+    )  # NOTE MODIFIED
     yHistogram: Optional[bool] = Field(
         None,
-        description='Controls if the tooltip shows a histogram of the y-axis values',
+        description="Controls if the tooltip shows a histogram of the y-axis values",
     )
 
 
 class RowsHeatmapOptions(MyBaseModel):
     value: Optional[str] = Field(
-        None, description='Sets the name of the cell when not calculating from data'
+        None, description="Sets the name of the cell when not calculating from data"
     )
     layout: Optional[HeatmapCellLayout] = None
 
 
 class Scheme(Enum):
-    Oranges = 'Oranges'
+    Oranges = "Oranges"
 
 
 class Fill(Enum):
-    dark_orange = 'dark-orange'
+    dark_orange = "dark-orange"
 
 
 class Reverse(Enum):
@@ -130,19 +136,19 @@ class Steps(Enum):
 class ColorItem(MyBaseModel):
     scheme: Scheme = Field(
         ...,
-        description='mode:     HeatmapColorMode // TODO: fix after remove when https://github.com/grafana/cuetsy/issues/74 is fixed',
+        description="mode:     HeatmapColorMode // TODO: fix after remove when https://github.com/grafana/cuetsy/issues/74 is fixed",
     )
     fill: Fill
     reverse: Reverse = Field(
         ...,
-        description='scale:    HeatmapColorScale // TODO: fix after remove when https://github.com/grafana/cuetsy/issues/74 is fixed',
+        description="scale:    HeatmapColorScale // TODO: fix after remove when https://github.com/grafana/cuetsy/issues/74 is fixed",
     )
     exponent: Exponent
     steps: Steps
 
 
 class Le(Enum):
-    field_1e_09 = '1e-09'
+    field_1e_09 = "1e-09"
 
 
 class FilterValue(MyBaseModel):
@@ -160,10 +166,10 @@ class HideableFieldConfig(MyBaseModel):
 
 
 class ScaleDistribution(Enum):
-    linear = 'linear'
-    log = 'log'
-    ordinal = 'ordinal'
-    symlog = 'symlog'
+    linear = "linear"
+    log = "log"
+    ordinal = "ordinal"
+    symlog = "symlog"
 
 
 class ScaleDistributionConfig(MyBaseModel):
@@ -173,9 +179,9 @@ class ScaleDistributionConfig(MyBaseModel):
 
 
 class VisibilityMode(Enum):
-    auto = 'auto'
-    never = 'never'
-    always = 'always'
+    auto = "auto"
+    never = "never"
+    always = "always"
 
 
 class AxisConfig(MyBaseModel):
@@ -193,7 +199,7 @@ class AxisConfig(MyBaseModel):
 class HeatmapCalculationBucketConfig(MyBaseModel):
     mode: Optional[HeatmapCalculationMode] = None
     value: Optional[str] = Field(
-        None, description='The number of buckets to use for the axis in the heatmap'
+        None, description="The number of buckets to use for the axis in the heatmap"
     )
     scale: Optional[ScaleDistributionConfig] = None
 
@@ -204,16 +210,16 @@ class HeatmapCalculationOptions(MyBaseModel):
 
 
 class YAxisConfig(AxisConfig):
-    unit: Optional[str] = Field(None, description='Sets the yAxis unit')
-    reverse: Optional[bool] = Field(None, description='Reverses the yAxis')
+    unit: Optional[str] = Field(None, description="Sets the yAxis unit")
+    reverse: Optional[bool] = Field(None, description="Reverses the yAxis")
     decimals: Optional[float] = Field(
-        None, description='Controls the number of decimals for yAxis values'
+        None, description="Controls the number of decimals for yAxis values"
     )
     min: Optional[float] = Field(
-        None, description='Sets the minimum value for the yAxis'
+        None, description="Sets the minimum value for the yAxis"
     )
     max: Optional[float] = Field(
-        None, description='Sets the maximum value for the yAxis'
+        None, description="Sets the maximum value for the yAxis"
     )
 
 
@@ -223,21 +229,21 @@ class PanelFieldConfig(HideableFieldConfig):
 
 class PanelOptions(MyBaseModel):
     calculate: Optional[bool] = Field(
-        False, description='Controls if the heatmap should be calculated from data'
+        False, description="Controls if the heatmap should be calculated from data"
     )
     calculation: Optional[HeatmapCalculationOptions] = None
     color: Optional[Union[HeatmapColorOptions, ColorItem]] = Field(
         {
-            'scheme': 'Oranges',
-            'fill': 'dark-orange',
-            'reverse': False,
-            'exponent': 0.5,
-            'steps': 64,
+            "scheme": "Oranges",
+            "fill": "dark-orange",
+            "reverse": False,
+            "exponent": 0.5,
+            "steps": 64,
         },
-        description='Controls the color options',
+        description="Controls the color options",
     )
     filterValues: Optional[Union[FilterValueRange, FilterValue]] = Field(
-        {'le': '1e-09'}, description='Filters values between a given range'
+        {"le": "1e-09"}, description="Filters values between a given range"
     )
     rowsFrame: Optional[RowsHeatmapOptions] = None
     showValue: VisibilityMode = Field(
@@ -245,11 +251,11 @@ class PanelOptions(MyBaseModel):
         description='| *{\n\tlayout: ui.HeatmapCellLayout & "auto" // TODO: fix after remove when https://github.com/grafana/cuetsy/issues/74 is fixed\n}\nControls the display of the value in the cell',
     )
     cellGap: Optional[conint(ge=0, le=25)] = Field(
-        1, description='Controls gap between cells'
+        1, description="Controls gap between cells"
     )
-    cellRadius: Optional[float] = Field(None, description='Controls cell radius')
+    cellRadius: Optional[float] = Field(None, description="Controls cell radius")
     cellValues: Optional[Union[CellValues, Any]] = Field(
-        {}, description='Controls cell value unit'
+        {}, description="Controls cell value unit"
     )
     yAxis: YAxisConfig = YAxisConfig()  # NOTE MODIFIED
     legend: HeatmapLegend = HeatmapLegend()  # NOTE MODIFIED
@@ -259,26 +265,26 @@ class PanelOptions(MyBaseModel):
 
 class HeatmapPanelCfg(MyBaseModel):
     HeatmapColorMode: HeatmapColorMode = Field(
-        ..., description='Controls the color mode of the heatmap'
+        ..., description="Controls the color mode of the heatmap"
     )
     HeatmapColorScale: HeatmapColorScale = Field(
-        ..., description='Controls the color scale of the heatmap'
+        ..., description="Controls the color scale of the heatmap"
     )
     HeatmapColorOptions: HeatmapColorOptions = Field(
-        ..., description='Controls various color options'
+        ..., description="Controls various color options"
     )
     YAxisConfig: YAxisConfig = Field(
-        ..., description='Configuration options for the yAxis'
+        ..., description="Configuration options for the yAxis"
     )
-    CellValues: CellValues = Field(..., description='Controls cell value options')
+    CellValues: CellValues = Field(..., description="Controls cell value options")
     FilterValueRange: FilterValueRange = Field(
-        ..., description='Controls the value filter range'
+        ..., description="Controls the value filter range"
     )
-    HeatmapTooltip: HeatmapTooltip = Field(..., description='Controls tooltip options')
-    HeatmapLegend: HeatmapLegend = Field(..., description='Controls legend options')
-    ExemplarConfig: ExemplarConfig = Field(..., description='Controls exemplar options')
+    HeatmapTooltip: HeatmapTooltip = Field(..., description="Controls tooltip options")
+    HeatmapLegend: HeatmapLegend = Field(..., description="Controls legend options")
+    ExemplarConfig: ExemplarConfig = Field(..., description="Controls exemplar options")
     RowsHeatmapOptions: RowsHeatmapOptions = Field(
-        ..., description='Controls frame rows options'
+        ..., description="Controls frame rows options"
     )
     PanelOptions: PanelOptions
     PanelFieldConfig: PanelFieldConfig

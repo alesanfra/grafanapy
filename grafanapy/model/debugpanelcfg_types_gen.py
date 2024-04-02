@@ -9,11 +9,11 @@ from grafanapy.utils import MyBaseModel
 
 
 class DebugMode(Enum):
-    render = 'render'
-    events = 'events'
-    cursor = 'cursor'
-    State = 'State'
-    ThrowError = 'ThrowError'
+    render = "render"
+    events = "events"
+    cursor = "cursor"
+    State = "State"
+    ThrowError = "ThrowError"
 
 
 class UpdateConfig(MyBaseModel):

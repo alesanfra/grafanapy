@@ -10,12 +10,12 @@ from pydantic import Field
 
 
 class BucketAggregationType(Enum):
-    terms = 'terms'
-    filters = 'filters'
-    geohash_grid = 'geohash_grid'
-    date_histogram = 'date_histogram'
-    histogram = 'histogram'
-    nested = 'nested'
+    terms = "terms"
+    filters = "filters"
+    geohash_grid = "geohash_grid"
+    date_histogram = "date_histogram"
+    histogram = "histogram"
+    nested = "nested"
 
 
 class Settings2(MyBaseModel):
@@ -25,15 +25,15 @@ class Settings2(MyBaseModel):
 class DataQuery(MyBaseModel):
     refId: str = Field(
         ...,
-        description='A unique identifier for the query within the list of targets.\nIn server side expressions, the refId is used as a variable name to identify results.\nBy default, the UI will assign A->Z; however setting meaningful names may be useful.',
+        description="A unique identifier for the query within the list of targets.\nIn server side expressions, the refId is used as a variable name to identify results.\nBy default, the UI will assign A->Z; however setting meaningful names may be useful.",
     )
     hide: Optional[bool] = Field(
         None,
-        description='true if query is disabled (ie should not be returned to the dashboard)\nNote this does not always imply that the query should not be executed since\nthe results from a hidden query may be used as the input to other queries (SSE etc)',
+        description="true if query is disabled (ie should not be returned to the dashboard)\nNote this does not always imply that the query should not be executed since\nthe results from a hidden query may be used as the input to other queries (SSE etc)",
     )
     queryType: Optional[str] = Field(
         None,
-        description='Specify the query flavor\nTODO make this required and give it a default',
+        description="Specify the query flavor\nTODO make this required and give it a default",
     )
     datasource: Optional[Any] = Field(
         None,
@@ -54,14 +54,14 @@ class Settings3(MyBaseModel):
 
 
 class ExtendedStatMetaType(Enum):
-    avg = 'avg'
-    min = 'min'
-    max = 'max'
-    sum = 'sum'
-    count = 'count'
-    std_deviation = 'std_deviation'
-    std_deviation_bounds_upper = 'std_deviation_bounds_upper'
-    std_deviation_bounds_lower = 'std_deviation_bounds_lower'
+    avg = "avg"
+    min = "min"
+    max = "max"
+    sum = "sum"
+    count = "count"
+    std_deviation = "std_deviation"
+    std_deviation_bounds_upper = "std_deviation_bounds_upper"
+    std_deviation_bounds_lower = "std_deviation_bounds_lower"
 
 
 class Filter(MyBaseModel):
@@ -100,25 +100,25 @@ class Settings6(MyBaseModel):
 
 
 class MetricAggregationType(Enum):
-    count = 'count'
-    avg = 'avg'
-    sum = 'sum'
-    min = 'min'
-    max = 'max'
-    extended_stats = 'extended_stats'
-    percentiles = 'percentiles'
-    cardinality = 'cardinality'
-    raw_document = 'raw_document'
-    raw_data = 'raw_data'
-    logs = 'logs'
-    rate = 'rate'
-    top_metrics = 'top_metrics'
-    moving_avg = 'moving_avg'
-    moving_fn = 'moving_fn'
-    derivative = 'derivative'
-    serial_diff = 'serial_diff'
-    cumulative_sum = 'cumulative_sum'
-    bucket_script = 'bucket_script'
+    count = "count"
+    avg = "avg"
+    sum = "sum"
+    min = "min"
+    max = "max"
+    extended_stats = "extended_stats"
+    percentiles = "percentiles"
+    cardinality = "cardinality"
+    raw_document = "raw_document"
+    raw_data = "raw_data"
+    logs = "logs"
+    rate = "rate"
+    top_metrics = "top_metrics"
+    moving_avg = "moving_avg"
+    moving_fn = "moving_fn"
+    derivative = "derivative"
+    serial_diff = "serial_diff"
+    cumulative_sum = "cumulative_sum"
+    bucket_script = "bucket_script"
 
 
 class Settings7(MyBaseModel):
@@ -152,11 +152,11 @@ class Settings12(MyBaseModel):
 
 
 class MovingAverageModel(Enum):
-    simple = 'simple'
-    linear = 'linear'
-    ewma = 'ewma'
-    holt = 'holt'
-    holt_winters = 'holt_winters'
+    simple = "simple"
+    linear = "linear"
+    ewma = "ewma"
+    holt = "holt"
+    holt_winters = "holt_winters"
 
 
 class MovingAverageModelOption(MyBaseModel):
@@ -177,12 +177,12 @@ class Settings14(MyBaseModel):
 
 
 class PipelineMetricAggregationType(Enum):
-    moving_avg = 'moving_avg'
-    moving_fn = 'moving_fn'
-    derivative = 'derivative'
-    serial_diff = 'serial_diff'
-    cumulative_sum = 'cumulative_sum'
-    bucket_script = 'bucket_script'
+    moving_avg = "moving_avg"
+    moving_fn = "moving_fn"
+    derivative = "derivative"
+    serial_diff = "serial_diff"
+    cumulative_sum = "cumulative_sum"
+    bucket_script = "bucket_script"
 
 
 class PipelineVariable(MyBaseModel):
@@ -209,8 +209,8 @@ class Settings19(MyBaseModel):
 
 
 class TermsOrder(Enum):
-    desc = 'desc'
-    asc = 'asc'
+    desc = "desc"
+    asc = "asc"
 
 
 class TermsSettings(MyBaseModel):
@@ -486,12 +486,12 @@ class MetricAggregation(MyBaseModel):
 
 
 class ElasticsearchDataQuery(DataQuery):
-    alias: Optional[str] = Field(None, description='Alias pattern')
-    query: Optional[str] = Field(None, description='Lucene query')
-    timeField: Optional[str] = Field(None, description='Name of time field')
+    alias: Optional[str] = Field(None, description="Alias pattern")
+    query: Optional[str] = Field(None, description="Lucene query")
+    timeField: Optional[str] = Field(None, description="Name of time field")
     bucketAggs: Optional[List[BucketAggregation]] = Field(
-        None, description='List of bucket aggregations'
+        None, description="List of bucket aggregations"
     )
     metrics: Optional[List[MetricAggregation]] = Field(
-        None, description='List of metric aggregations'
+        None, description="List of metric aggregations"
     )

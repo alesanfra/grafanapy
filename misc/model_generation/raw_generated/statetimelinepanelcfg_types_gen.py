@@ -20,20 +20,20 @@ class HideableFieldConfig(MyBaseModel):
 
 
 class LegendDisplayMode(Enum):
-    list = 'list'
-    table = 'table'
-    hidden = 'hidden'
+    list = "list"
+    table = "table"
+    hidden = "hidden"
 
 
 class LegendPlacement(Enum):
-    bottom = 'bottom'
-    right = 'right'
+    bottom = "bottom"
+    right = "right"
 
 
 class SortOrder(Enum):
-    asc = 'asc'
-    desc = 'desc'
-    none = 'none'
+    asc = "asc"
+    desc = "desc"
+    none = "none"
 
 
 class PanelFieldConfig(HideableFieldConfig):
@@ -42,32 +42,32 @@ class PanelFieldConfig(HideableFieldConfig):
 
 
 class TimeZoneEnum(Enum):
-    utc = 'utc'
+    utc = "utc"
 
 
 class TimeZone(MyBaseModel):
     __root__: Optional[Union[TimeZoneEnum, Any]] = Field(
-        'browser',
-        description='A specific timezone from https://en.wikipedia.org/wiki/Tz_database',
+        "browser",
+        description="A specific timezone from https://en.wikipedia.org/wiki/Tz_database",
     )
 
 
 class TimelineValueAlignment(Enum):
-    center = 'center'
-    left = 'left'
-    right = 'right'
+    center = "center"
+    left = "left"
+    right = "right"
 
 
 class TooltipDisplayMode(Enum):
-    single = 'single'
-    multi = 'multi'
-    none = 'none'
+    single = "single"
+    multi = "multi"
+    none = "none"
 
 
 class VisibilityMode(Enum):
-    auto = 'auto'
-    never = 'never'
-    always = 'always'
+    auto = "auto"
+    never = "never"
+    always = "always"
 
 
 class VizLegendOptions(MyBaseModel):
@@ -100,13 +100,13 @@ class OptionsWithTooltip(MyBaseModel):
 
 
 class PanelOptions(OptionsWithLegend, OptionsWithTooltip, OptionsWithTimezones):
-    showValue: VisibilityMode = Field(..., description='Show timeline values on chart')
-    rowHeight: confloat(le=1.0) = Field(..., description='Controls the row height')
+    showValue: VisibilityMode = Field(..., description="Show timeline values on chart")
+    rowHeight: confloat(le=1.0) = Field(..., description="Controls the row height")
     mergeValues: Optional[bool] = Field(
-        True, description='Merge equal consecutive values'
+        True, description="Merge equal consecutive values"
     )
     alignValue: Optional[TimelineValueAlignment] = Field(
-        None, description='Controls value alignment on the timelines'
+        None, description="Controls value alignment on the timelines"
     )
 
 
