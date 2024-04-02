@@ -5,7 +5,7 @@ from __future__ import annotations
 from enum import Enum
 from typing import List, Optional, Union
 
-from grafana_dashboard.utils import MyBaseModel
+from grafanapy.utils import MyBaseModel
 from pydantic import Field
 
 

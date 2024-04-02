@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from grafana_dashboard.utils import MyBaseModel
+from grafanapy.utils import MyBaseModel
 
 
 class PanelOptions(MyBaseModel):

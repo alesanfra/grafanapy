@@ -1,8 +1,5 @@
 # grafana_dashboard_python
 
-[![PyPI](https://img.shields.io/pypi/v/grafana-dashboard)](https://pypi.org/project/grafana-dashboard/)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/c12919fe67ca46f098bf1a57bb8adb1e)](https://app.codacy.com/gh/fzyzcjy/grafana_dashboard_python/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-
 Write Grafana dashboards in Python, without losing thousands of dashboards in the zoo
 
 ![](https://github.com/fzyzcjy/grafana_dashboard_python/blob/master/doc/simple_explain.png?raw=true)
@@ -17,7 +14,7 @@ In the following sections, I assume you are familiar with Grafanalib, and want t
 
 ## Installation
 
-```py
+```shell
 pip install grafana_dashboard
 ```
 
@@ -27,7 +24,7 @@ pip install grafana_dashboard
 
 To begin with, get your dashboard from wherever you like, such as https://grafana.com/grafana/dashboards/, or your legacy dashboards. Then convert it to Python code:
 
-```py
+```shell
 grafana_dashboard json-to-python --json-path ... --python-path ...
 ```
 

@@ -6,7 +6,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional, Union
 
-from grafana_dashboard.utils import MyBaseModel
+from grafanapy.utils import MyBaseModel
 from pydantic import Field, conint, constr
 
 

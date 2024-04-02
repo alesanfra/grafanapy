@@ -1,6 +1,6 @@
-from grafana_dashboard.model.dashboard_types_gen import *
-from grafana_dashboard.model.prometheusdataquery_types_gen import *
-from grafana_dashboard.model.timeseriespanelcfg_types_gen import *
+from grafanapy.model.dashboard_types_gen import *
+from grafanapy.model.prometheusdataquery_types_gen import *
+from grafanapy.model.timeseriespanelcfg_types_gen import *
 
 dashboard = Dashboard(
     title='New dashboard',
